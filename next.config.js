@@ -3,7 +3,7 @@ const nextConfig = {
   reactStrictMode: false,
   env: {
     // BASE_API_URL: "http://localhost:4000",
-    BASE_API_URL: "http://api.dr-solar2023.com",
+    BASE_API_URL: "https://api.dr-solar2023.com",
   },
   async headers() {
     return [
