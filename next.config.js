@@ -2,20 +2,20 @@
 const nextConfig = {
   reactStrictMode: false,
   env: {
-    // BASE_API_URL: "http://localhost:4000",
-    BASE_API_URL: "https://api.dr-solar2023.com",
+    BASE_API_URL: "http://localhost:9000",
+    // BASE_API_URL: "https://api.dr-solar2023.com",
   },
   async headers() {
     return [
       {
-        // source: "//localhost:4000/(.*)",
-        source: "//api.dr-solar2023.com/(.*)",
+        source: "//localhost:9000/(.*)",
+        // source: "//api.dr-solar2023.com/(.*)",
         headers: [
           { key: "Access-Control-Allow-Credentials", value: "true" },
           {
             key: "Access-Control-Allow-Origin",
-            // value: "http://localhost:3000",
-            value: "https://dr-solar2023.com",
+            value: "http://localhost:3000",
+            // value: "https://dr-solar2023.com",
           },
           {
             key: "Access-Control-Allow-Methods",

@@ -15,6 +15,7 @@ export default function Profile() {
     const [firstAndLastName, setFirstAndLastName] = useState("");
     const [email, setEmail] = useState("");
     const [mobilePhone, setMobilePhone] = useState("");
+    const [whatsappNumber, setWhatsappNumber] = useState("");
     const [password, setPassword] = useState("");
     const [gender, setGender] = useState("");
     const [birthday, setBirthday] = useState("");
@@ -58,6 +59,7 @@ export default function Profile() {
                         setFirstAndLastName(result.firstAndLastName);
                         setEmail(result.email);
                         setMobilePhone(result.mobilePhone);
+                        setWhatsappNumber(result.whatsappNumber);
                         setGender(result.gender);
                         setBirthday(result.birthday);
                         setCity(result.city);
@@ -98,6 +100,18 @@ export default function Profile() {
                 {
                     name: "mobilePhone",
                     value: mobilePhone,
+                    rules: {
+                        isRequired: {
+                            msg: "عذراً ، لا يجب أن يكون الحقل فارغاً !!",
+                        },
+                        isValidMobilePhone: {
+                            msg: "عذراً ، يجب يكون رقم الهاتف من 10 أرقام ويجب أن يبدأ بإحدى الأرقام التالية : (093 أو 099 أو 098 أو 094 أو 095 أو 096 )",
+                        },
+                    },
+                },
+                {
+                    name: "whatsappNumber",
+                    value: whatsappNumber,
                     rules: {
                         isRequired: {
                             msg: "عذراً ، لا يجب أن يكون الحقل فارغاً !!",
@@ -166,6 +180,7 @@ export default function Profile() {
                 firstAndLastName: firstAndLastName,
                 email: email,
                 mobilePhone: mobilePhone,
+                whatsappNumber: whatsappNumber,
                 password: password,
                 gender,
                 birthday,
@@ -270,6 +285,16 @@ export default function Profile() {
                                 />
                                 {/* بداية رسالة الخطأ بالإدخال للمُدخل المحدد */}
                                 {errors["mobilePhone"] && <p className='error-msg text-danger'>{errors["mobilePhone"]}</p>}
+                                <input
+                                    type="number"
+                                    placeholder="رقم الواتس آب"
+                                    // في حالة يوجد خطأ بالإدخال نجعل الحواف بلون أحمر
+                                    className={`form-control p-3 ${errors["whatsappNumber"] ? "border border-danger mb-2" : "mb-4"}`}
+                                    onChange={(e) => setWhatsappNumber(e.target.value.trim())}
+                                />
+                                {/* بداية رسالة الخطأ بالإدخال للمُدخل المحدد */}
+                                {errors["whatsappNumber"] && <p className='error-msg text-danger'>{errors["whatsappNumber"]}</p>}
+                                {/* نهاية رسالة الخطأ بالإدخال للمُدخل المحدد */}
                                 {/* نهاية رسالة الخطأ بالإدخال للمُدخل المحدد */}
                                 <div className='password-field-box'>
                                     <input

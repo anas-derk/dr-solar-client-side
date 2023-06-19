@@ -15,6 +15,7 @@ export default function Signup() {
     const [firstAndLastName, setFirstAndLastName] = useState("");
     const [email, setEmail] = useState("");
     const [mobilePhone, setMobilePhone] = useState("");
+    const [whatsappNumber, setWhatsappNumber] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [gender, setGender] = useState("");
@@ -61,6 +62,18 @@ export default function Signup() {
                 {
                     name: "mobilePhone",
                     value: mobilePhone,
+                    rules: {
+                        isRequired: {
+                            msg: "عذراً ، لا يجب أن يكون الحقل فارغاً !!",
+                        },
+                        isValidMobilePhone: {
+                            msg: "عذراً ، يجب يكون رقم الهاتف من 10 أرقام ويجب أن يبدأ بإحدى الأرقام التالية : (093 أو 099 أو 098 أو 094 أو 095 أو 096 )",
+                        },
+                    },
+                },
+                {
+                    name: "whatsappNumber",
+                    value: whatsappNumber,
                     rules: {
                         isRequired: {
                             msg: "عذراً ، لا يجب أن يكون الحقل فارغاً !!",
@@ -147,6 +160,7 @@ export default function Signup() {
                     firstAndLastName,
                     email: email ? email : "",
                     mobilePhone,
+                    whatsappNumber,
                     password,
                     gender,
                     birthday,
@@ -231,6 +245,16 @@ export default function Signup() {
                                 />
                                 {/* بداية رسالة الخطأ بالإدخال للمُدخل المحدد */}
                                 {errors["mobilePhone"] && <p className='error-msg text-danger'>{errors["mobilePhone"]}</p>}
+                                {/* نهاية رسالة الخطأ بالإدخال للمُدخل المحدد */}
+                                <input
+                                    type="number"
+                                    placeholder="رقم الواتس آب"
+                                    // في حالة يوجد خطأ بالإدخال نجعل الحواف بلون أحمر
+                                    className={`form-control p-3 ${errors["whatsappNumber"] ? "border border-danger mb-2" : "mb-4"}`}
+                                    onChange={(e) => setWhatsappNumber(e.target.value.trim())}
+                                />
+                                {/* بداية رسالة الخطأ بالإدخال للمُدخل المحدد */}
+                                {errors["whatsappNumber"] && <p className='error-msg text-danger'>{errors["whatsappNumber"]}</p>}
                                 {/* نهاية رسالة الخطأ بالإدخال للمُدخل المحدد */}
                                 <div className='password-field-box'>
                                     <input

@@ -38,14 +38,14 @@ export default function ContactUs() {
                                     نهتم بشكل كبير في النمو والتطور والريادة ولنكون الأفضل دائماً نحن بحاجة أن نتعلم منك ما هي الآراء والأفكار أو المفاهيم التي قد تجعلك في راحة أكثر لذا أخبرنا كيف من خلال التواصل معنا.
                                 </p>
                                 <p className='how-to-contact-us-explain pe-4 ps-4 mb-5'>
-                                    و كذلك التعليقات والشكاوي ستظل دائمًا مرحبا   بها في مستر فيكس
+                                    و كذلك التعليقات والشكاوي ستظل دائمًا مرحبا بها في دكتور سولار
                                 </p>
                                 <p className='how-to-contact-us-explain pe-4 ps-4'>
                                     كلنا آذان صاغية على :
                                 </p>
                                 <p className='how-to-contact-us-explain pe-4 ps-4 mb-4'>
                                     E-mail:
-                                    <a href="mailto:mrfix.help@gmail.com" className='email-link'> mrfix.help@gmail.com</a>
+                                    <a href="mailto:mrfix.help@gmail.com" className='email-link'> dr.solar.help@gmail.com</a>
                                 </p>
                                 <p className='how-to-contact-us-explain pe-4 ps-4'>
                                     كافة ما يتعلق بالموقع ومشاكل التسجيل والإشتراك والطلبات عبر الموقع  والاستفسارات حول الاشتراك وكذلك الشكاوي
