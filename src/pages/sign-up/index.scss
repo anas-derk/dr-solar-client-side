@@ -1,0 +1,42 @@
+.sign-up {
+    .page-content {
+        background-color: var(--main-color-five);
+        .container {
+            min-height: inherit;
+            .sign-up-form {
+                textarea {
+                    resize: none;
+                }
+                .address{
+                    height: calc(116px + 1.5rem);
+                }
+                .sign-up-btn, .wait-sign-up-btn {
+                    background-color: var(--main-color-one);
+                    color: #FFF;
+                }
+            }
+        }
+    }
+    .popup-box {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        backdrop-filter: blur(2px);
+        .popup{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 50%;
+            height: 50%;
+            background: #FFF;
+            transform: translate(-50%, -50%);
+            border-radius: 10px;
+            border: 2px solid var(--main-color-one);
+            @media (max-width: 767px) {
+                width: 90%;
+            }
+        }
+    }
+}

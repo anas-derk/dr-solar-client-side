@@ -1,0 +1,30 @@
+.service-request{
+    .page-content{
+        background-color: var(--main-color-five);
+        .container{
+            min-height: inherit;
+            .service-request-form{
+                .file-box{
+                    height: 58px;
+                    .file-label{
+                        cursor: pointer;
+                        .upload-file-icon{
+                            font-size: 23px;
+                        }
+                    }
+                    input[type = "file"] {
+                        visibility: hidden;
+                    }
+                }
+                textarea{
+                    resize: none;
+                    height: calc(116px + 1.5rem);
+                }
+                .service-request-btn, .wait-requesting-btn{
+                    background-color: var(--main-color-one);
+                    color: #FFF;
+                }
+            }
+        }
+    }
+}

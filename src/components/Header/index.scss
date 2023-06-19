@@ -1,0 +1,45 @@
+.page-header{
+    background-color: var(--main-color-one);
+    border-bottom: 7px solid var(--main-color-two);
+    .outline-menu-icon, .outline-menu-close-icon{
+        font-size: 33px;
+        cursor: pointer;
+    }
+    .navbar{
+        .navbar-toggler{
+            border: 2px solid var(--main-color-three);
+            color: var(--main-color-three);
+            font-weight: bold;
+        }
+        .collapse{
+            @media (max-width: 991px) {
+                order: 3;
+            }
+        }
+        .logo-box{
+            @media (max-width: 991px) {
+                order: 2;
+            }
+        }
+        .navbar-nav{
+            .nav-item{
+                .nav-link{
+                    font-size: 18px;
+                    &:hover{
+                        color: #0F0;
+                    }
+                    @media (max-width: 991px) {
+                        text-align: center;
+                        &.logout-btn{
+                            margin: 10px auto;
+                            padding: {
+                                left: 10px;
+                                right: 10px;
+                            };
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

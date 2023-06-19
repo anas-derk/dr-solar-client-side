@@ -1,0 +1,8 @@
+.passwords-reset {
+  background-color: var(--main-color-five);
+  min-height: 100vh;
+}
+
+.passwords-reset .content {
+  min-height: inherit;
+}
