@@ -19,7 +19,7 @@ export default function ContactUs() {
         <div className="contact-us shared-pages-with-styles">
             {/* بداية كتابة معلومات عنصر ال head في ال html */}
             <Head>
-                <title>مستر فيكس - اتصل بنا</title>
+                <title>دكتور سولار - اتصل بنا</title>
             </Head>
             {/* نهاية كتابة معلومات عنصر ال head في ال html */}
             {/* بداية عرض مكون الرأس الذي أنشأناه */}

@@ -105,7 +105,7 @@ export default function ForgetPassword() {
         <div className="forget-password shared-pages-with-styles">
             {/* بداية كتابة معلومات عنصر ال head في ال html */}
             <Head>
-                <title>مستر فيكس - نسيت كلمة السر</title>
+                <title>دكتور سولار - نسيت كلمة السر</title>
             </Head>
             {/* نهاية كتابة معلومات عنصر ال head في ال html */}
             {/* بداية عرض مكون الرأس الذي أنشأناه */}

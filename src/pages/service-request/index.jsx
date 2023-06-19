@@ -286,7 +286,7 @@ export default function ServiceRequest() {
         <div className="service-request">
             {/* بداية كتابة معلومات عنصر ال head في ال html */}
             <Head>
-                <title>مستر فيكس - طلب خدمة</title>
+                <title>دكتور سولار - طلب خدمة</title>
             </Head>
             {/* نهاية كتابة معلومات عنصر ال head في ال html */}
             {/* بداية عرض مكون الرأس الذي أنشأناه */}

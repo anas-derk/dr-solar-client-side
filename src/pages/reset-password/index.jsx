@@ -144,7 +144,7 @@ export default function ResetPassword() {
         <div className="reset-password shared-pages-with-styles">
             {/* بداية كتابة معلومات عنصر ال head في ال html */}
             <Head>
-                <title>مستر فيكس - إعادة تعيين كلمة السر</title>
+                <title>دكتور سولار - إعادة تعيين كلمة السر</title>
             </Head>
             {/* نهاية كتابة معلومات عنصر ال head في ال html */}
             {/* بداية عرض مكون الرأس الذي أنشأناه */}

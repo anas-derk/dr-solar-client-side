@@ -140,7 +140,7 @@ export default function Login() {
         <div className="login shared-pages-with-styles">
             {/* بداية كتابة معلومات عنصر ال head في ال html */}
             <Head>
-                <title>مستر فيكس - تسجيل الدخول</title>
+                <title>دكتور سولار - تسجيل الدخول</title>
             </Head>
             {/* نهاية كتابة معلومات عنصر ال head في ال html */}
             {/* بداية عرض مكون الرأس الذي أنشأناه */}

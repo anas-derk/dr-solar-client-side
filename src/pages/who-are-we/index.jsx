@@ -19,7 +19,7 @@ export default function WhoAreWe() {
         <div className="who-are-we shared-pages-with-styles">
             {/* بداية كتابة معلومات عنصر ال head في ال html */}
             <Head>
-                <title>مستر فيكس - من نحن ؟</title>
+                <title>دكتور سولار - من نحن ؟</title>
             </Head>
             {/* نهاية كتابة معلومات عنصر ال head في ال html */}
             {/* بداية عرض مكون الرأس الذي أنشأناه */}

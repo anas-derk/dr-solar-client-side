@@ -190,7 +190,7 @@ export default function Signup() {
         <div className="sign-up">
             {/* بداية كتابة معلومات عنصر ال head في ال html */}
             <Head>
-                <title>مستر فيكس - إنشاء حساب</title>
+                <title>دكتور سولار - إنشاء حساب</title>
             </Head>
             {/* نهاية كتابة معلومات عنصر ال head في ال html */}
             {/* بداية عرض مكون الرأس الذي أنشأناه */}
@@ -200,7 +200,7 @@ export default function Signup() {
             <section className="page-content pt-4 pb-4">
                 {/* بداية مكون الحاوية من البوتستراب */}
                 <div className="container">
-                    <h1 className='page-title mb-4'>أهلاً وسهلاً بك في مستر فيكس</h1>
+                    <h1 className='page-title mb-4'>أهلاً وسهلاً بك في دكتور سولار</h1>
                     <form className="sign-up-form" onSubmit={createAccount}>
                         {/* بداية مكون الشبكة من البوتستراب */}
                         <div className="row">

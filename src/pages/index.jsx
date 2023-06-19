@@ -35,7 +35,7 @@ export default function Home({ result }) {
     <div className="home">
       {/* بداية كتابة معلومات عنصر ال head في ال html */}
       <Head>
-        <title>مستر فيكس - الصفحة الرئيسية</title>
+        <title>دكتور سولار - الصفحة الرئيسية</title>
       </Head>
       {/* نهاية كتابة معلومات عنصر ال head في ال html */}
       {/* بداية عرض مكون الرأس الذي أنشأناه */}

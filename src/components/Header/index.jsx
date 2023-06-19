@@ -52,12 +52,6 @@ export default function Header() {
                                 </Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" href="/our-services">
-                                    <MdOutlineMedicalServices />
-                                    <span className="me-2">خدماتنا</span>
-                                </Link>
-                            </li>
-                            <li className="nav-item">
                                 <Link className="nav-link" href="/contact-us">
                                     <MdOutlineContactPhone />
                                     <span className="me-2">اتصل بنا</span>

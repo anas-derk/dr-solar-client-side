@@ -225,7 +225,7 @@ export default function Profile() {
         <div className="profile">
             {/* بداية كتابة معلومات عنصر ال head في ال html */}
             <Head>
-                <title>مستر فيكس - الملف الشخصي</title>
+                <title>دكتور سولار - الملف الشخصي</title>
             </Head>
             {/* نهاية كتابة معلومات عنصر ال head في ال html */}
             {/* بداية عرض مكون الرأس الذي أنشأناه */}

@@ -8,7 +8,6 @@ import "../pages/index.css";
 import "../pages/login/index.css";
 import "./sign-up/index.css";
 import "./contact-us/index.css";
-import "./our-services/index.css";
 import "./service-request/index.css";
 import "./forget-password/index.css";
 import "./reset-password/index.css";

@@ -19,7 +19,7 @@ export default function Ads({ result }) {
         <div className="ads shared-pages-with-styles">
             {/* بداية كتابة معلومات عنصر ال head في ال html */}
             <Head>
-                <title>مستر فيكس - الإعلانات</title>
+                <title>دكتور سولار - الإعلانات</title>
             </Head>
             {/* نهاية كتابة معلومات عنصر ال head في ال html */}
             {/* بداية عرض مكون الرأس الذي أنشأناه */}
