@@ -163,7 +163,7 @@ export default function ResetPassword() {
                                 className="reset-password-form p-4 text-center"
                                 onSubmit={resetPassword}
                             >
-                                <h4 className='mb-4'>إعادة تعيين كلمة السر !</h4>
+                                <h4 className='mb-4 welcome-msg'>إعادة تعيين كلمة السر !</h4>
                                 <input
                                     type="text"
                                     placeholder="أدخل الكود"

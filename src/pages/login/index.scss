@@ -20,10 +20,18 @@
                 }
                 .login-form{
                     border-radius: 20px;
+                    .welcome-msg{
+                        font-family: 'Cairo', sans-serif;
+                        font-size: 30px;
+                    }
+                    .forget-password-link{
+                        font-family: 'Cairo', sans-serif;
+                    }
                     .login-btn, .wait-login-btn{
                         background-color: var(--main-color-one);
                         font-weight: bold;
                         border: 1px solid #000;
+                        font-family: 'Cairo', sans-serif;
                     }
                 }
                 .login-img{

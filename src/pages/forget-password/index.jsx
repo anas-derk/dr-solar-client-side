@@ -121,10 +121,10 @@ export default function ForgetPassword() {
                         <div className="col-lg-6 p-5">
                             {/* بداية كتابة كود ال jsx لعنصر ال html المسمى forget-password-form */}
                             <form
-                                className="forget-password-form text-center mt-4"
+                                className="forget-password-form p-4 text-center mt-4"
                                 onSubmit={forgetPassword}
                             >
-                                <h4 className='mb-5'>نسيت كلمة السر !</h4>
+                                <h4 className='mb-5 welcome-msg'>نسيت كلمة السر !</h4>
                                 <input
                                     type="text"
                                     placeholder="البريد الالكتروني"

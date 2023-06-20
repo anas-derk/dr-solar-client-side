@@ -19,14 +19,21 @@
                     }
                 }
                 .forget-password-form{
+                    .welcome-msg{
+                        font-family: 'Cairo', sans-serif;
+                        font-size: 30px;
+                    }
                     .forget-password-btn, .wait-check-btn{
                         background-color: var(--main-color-one);
                         border: 1px solid #000;
+                        font-weight: bold;
+                        font-family: 'Cairo', sans-serif;
                     }
                     .note{
                         text-align: justify;
                         line-height: 2.2;
                         font-size: 18px;
+                        font-weight: bold;
                     }
                 }
                 .forget-password-img{

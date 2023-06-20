@@ -156,7 +156,7 @@ export default function Login() {
                         <div className="col-lg-7 p-5">
                             {/* بداية كتابة كود ال jsx لعنصر ال html المسمى login-form */}
                             <form className="login-form p-4 text-center" onSubmit={login}>
-                                <h4 className='mb-4'>أهلاً بعودتك .</h4>
+                                <h4 className='mb-4 welcome-msg'>أهلاً بعودتك .</h4>
                                 <input
                                     type="text"
                                     placeholder="البريد الالكتروني أو رقم الجوال"
@@ -183,7 +183,7 @@ export default function Login() {
                                 {/* بداية رسالة الخطأ بالإدخال للمُدخل المحدد */}
                                 {errors["password"] && <p className='error-msg text-danger'>{errors["password"]}</p>}
                                 {/* نهاية رسالة الخطأ بالإدخال للمُدخل المحدد */}
-                                <Link href="/forget-password" className='mb-3 btn w-100 text-start'>نسيت كلمة السر !</Link>
+                                <Link href="/forget-password" className='mb-3 btn w-100 text-start forget-password-link'>نسيت كلمة السر !</Link>
                                 {/* في حالة لم يكن لدينا حالة تسجيل الدخول في الانتظار ولا يوجد أي خطأ نظهر المكون التالي */}
                                 {!isLoginStatus && !errMsg && <button type='submit' className='btn login-btn w-100 p-3'>تسجيل الدخول</button>}
                                 {/* في حالة لم يكن لدينا حالة تسجيل الدخول في الانتظار ولا يوجد أي خطأ نظهر المكون التالي */}

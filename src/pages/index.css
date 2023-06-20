@@ -1,6 +1,7 @@
 .home .page-content .ads {
   background-color: var(--main-color-three);
   cursor: pointer;
+  font-weight: bold;
 }
 
 .home .page-content .ads .carousel {
@@ -135,4 +136,5 @@
   font-weight: bold;
   font-size: 20px;
   border: 1px solid #000;
+  font-family: 'Cairo', sans-serif;
 }

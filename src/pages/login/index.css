@@ -26,10 +26,20 @@
   border-radius: 20px;
 }
 
+.login .page-content .container .row .login-form .welcome-msg {
+  font-family: 'Cairo', sans-serif;
+  font-size: 30px;
+}
+
+.login .page-content .container .row .login-form .forget-password-link {
+  font-family: 'Cairo', sans-serif;
+}
+
 .login .page-content .container .row .login-form .login-btn, .login .page-content .container .row .login-form .wait-login-btn {
   background-color: var(--main-color-one);
   font-weight: bold;
   border: 1px solid #000;
+  font-family: 'Cairo', sans-serif;
 }
 
 .login .page-content .container .row .login-img {

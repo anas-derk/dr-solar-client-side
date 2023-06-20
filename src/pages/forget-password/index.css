@@ -22,15 +22,23 @@
   }
 }
 
+.forget-password .page-content .container .row .forget-password-form .welcome-msg {
+  font-family: 'Cairo', sans-serif;
+  font-size: 30px;
+}
+
 .forget-password .page-content .container .row .forget-password-form .forget-password-btn, .forget-password .page-content .container .row .forget-password-form .wait-check-btn {
   background-color: var(--main-color-one);
   border: 1px solid #000;
+  font-weight: bold;
+  font-family: 'Cairo', sans-serif;
 }
 
 .forget-password .page-content .container .row .forget-password-form .note {
   text-align: justify;
   line-height: 2.2;
   font-size: 18px;
+  font-weight: bold;
 }
 
 .forget-password .page-content .container .row .forget-password-img {

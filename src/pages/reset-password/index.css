@@ -18,10 +18,16 @@
   }
 }
 
+.reset-password .page-content .container .row .reset-password-form .welcome-msg {
+  font-family: 'Cairo', sans-serif;
+  font-size: 30px;
+}
+
 .reset-password .page-content .container .row .reset-password-form .reset-password-btn, .reset-password .page-content .container .row .reset-password-form .wait-reset-password-btn {
   background-color: var(--main-color-one);
   font-weight: bold;
   border: 1px solid #000;
+  font-family: 'Cairo', sans-serif;
 }
 
 .reset-password .page-content .container .row .reset-password-img {

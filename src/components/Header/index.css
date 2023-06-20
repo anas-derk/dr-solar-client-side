@@ -1,6 +1,7 @@
 .page-header {
   background-color: var(--main-color-one);
   border-bottom: 4px solid #444;
+  font-family: 'Cairo', sans-serif;
 }
 
 .page-header .outline-menu-icon, .page-header .outline-menu-close-icon {
