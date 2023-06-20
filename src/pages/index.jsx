@@ -77,13 +77,13 @@ export default function Home({ result }) {
                     {/* بداية مكون العمود */}
                     <div className="col-md-5 content-box">
                       <div className='slider-content-explain text-center'>
-                        <p className='pe-2 ps-2 exeption-paragraph'>دعنا نساعدك في تنظيم كل شيء في المنزل و تبسيط جميع الأمور المتعلقة بالمنزل وتغطية احتياجات الصيانة</p>
+                        <p className='pe-2 ps-2 exeption-paragraph'>دعنا نساعدك في إنقاذ الطاقة البديلة لديك من الضياع والتشتت وهدر الطاقة من خلال الصيانة الدورية والتنظيف </p>
                       </div>
                     </div>
                     {/* نهاية مكون العمود */}
                     {/* بداية مكون العمود */}
                     <div className="col-md-7 image-box image-box1">
-                      <p className='text-center home-paragraph'>المنزل هو كل الأشياء الرائعة</p>
+                      <p className='text-center home-paragraph'>الطاقة من أهم الأشياء التي نعتمد عليها في حياتنا</p>
                       <img src={sliderImage1.src} alt="Slider Image 1" className='slider-image slider-image-1' />
                     </div>
                     {/* نهاية مكون العمود */}
@@ -100,13 +100,13 @@ export default function Home({ result }) {
                     {/* بداية مكون العمود */}
                     <div className="col-md-5 content-box custom-mobile">
                       <div className='slider-content-explain text-center'>
-                        <p>معًا، سنعمل على صيانة منزلك  والمحافظة عليه من خلال موقع بسيط حيث يتيح مستر فيكس إصلاح وصيانة جميع ما يحتاجه منزلك في مكان واحد</p>
+                        <p>نسبة و مستوى الاتساخ والظل المؤقت والدائم، كلها عوامل ناتجة عن مصادر متنوعة  مثل فضلات الطيور والغبار والانبعاثات وكذلك مكان التركيب الخاطىء</p>
                       </div>
                     </div>
                     {/* نهاية مكون العمود */}
                     {/* بداية مكون العمود */}
                     <div className="col-md-7 image-box image-box2">
-                      <p className='home-paragraph'>أعتني بمنزلك من خلال هاتفك</p>
+                      <p className='home-paragraph'>يتحسّن أداء ألواح الطاقة الشمسية عندما تكون نظيفة</p>
                       <img src={sliderImage2.src} alt="Slider Image 2" className='slider-image slider-image-2 ' />
                     </div>
                     {/* نهاية مكون العمود */}
@@ -123,13 +123,13 @@ export default function Home({ result }) {
                     {/* بداية مكون العمود */}
                     <div className="col-md-5 content-box">
                       <div className='slider-content-explain text-center'>
-                        <p className='exeption-paragraph-3'>نبسط الأمور، ونرغب في أن نكون جزءَ في تخفيف الأعباء وتوفير الأمان والراحة بشكل دائم لذا نريد منك أن تفكر فينا كشريك موثوق به</p>
+                        <p className='exeption-paragraph-3'>نبسط الأمور، ونرغب في أن نكون جزءَ في تخفيف الأعباء وتوفير الأمان والراحة حيث معًا سنعمل على صيانة الطاقة والمحافظة عليها من خلال موقع بسيط</p>
                       </div>
                     </div>
                     {/* نهاية مكون العمود */}
                     {/* بداية مكون العمود */}
                     <div className="col-md-7 image-box image-box3">
-                      <p className='home-paragraph'>دعنا نحافظ على ابتسامتك</p>
+                      <p className='home-paragraph'>اعتني بالطاقة لديك من خلال هاتفك</p>
                       <img src={sliderImage3.src} alt="Slider Image 3" className='slider-image slider-image-3' />
                     </div>
                     {/* نهاية مكون العمود */}
@@ -143,12 +143,12 @@ export default function Home({ result }) {
           {/* بداية كتابة كود ال jsx عنصر الرابط الخاص بصفحة إنشاء حساب */}
           {/* نعرضه في حالة لم يكن يوجد معرّف للمستخدم */}
           {!userId && <Link href="/sign-up" className='d-block btn start-with-us-btn mt-3 mx-auto pt-2 pe-5 ps-5'>
-            <span>إبدأ معنا</span>
+            <span>اشترك الآن</span>
           </Link>}
           {/* نهاية كتابة كود ال jsx عنصر الرابط الخاص بصفحة إنشاء حساب */}
           {/* بداية كتابة كود ال jsx عنصر الرابط الخاص بصفحة طلب خدمة */}
           {userId && <Link className='d-block btn service-request-btn mt-3 mx-auto pt-2 pe-5 ps-5' href="/service-request">
-            <span className='ms-2'>طلب خدمة</span>
+            <span className='ms-2'>طلب الخدمة ( الاشتراك )</span>
           </Link>}
           {/* نهاية كتابة كود ال jsx عنصر الرابط الخاص بصفحة طلب خدمة */}
         </section>
