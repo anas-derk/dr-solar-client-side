@@ -83,12 +83,6 @@ input, select, textarea {
   height: 100%;
 }
 
-@media (max-width: 767px) {
-  .shared-pages-with-styles .page-content .container .row .image-box {
-    padding-left: 3rem;
-  }
-}
-
 .shared-pages-with-styles .page-content .container .row .page-content-explain {
   text-align: justify;
   line-height: 2;

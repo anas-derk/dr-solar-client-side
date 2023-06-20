@@ -66,7 +66,7 @@ export default function ContactUs() {
                         {/* نهاية مكون العمود */}
                         {/* بداية مكون العمود */}
                         <div className="col-md-6">
-                            <div className="image-box">
+                            <div className="image-box text-center">
                                 <img src={contactUsImage.src} alt="Contact Us Image !!" className='contact-us-img page-img' />
                             </div>
                         </div>

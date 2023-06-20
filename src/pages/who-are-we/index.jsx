@@ -101,7 +101,7 @@ export default function WhoAreWe() {
                         {/* نهاية مكون العمود */}
                         {/* بداية مكون العمود */}
                         <div className="col-md-6">
-                            <div className='image-box'>
+                            <div className='image-box text-center'>
                                 <img src={whoAreWeImage.src} alt="Who Are We Image !!" className='who-are-we-img page-img' />
                             </div>
                         </div>
