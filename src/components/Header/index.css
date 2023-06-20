@@ -1,6 +1,6 @@
 .page-header {
   background-color: var(--main-color-one);
-  border-bottom: 7px solid var(--main-color-two);
+  border-bottom: 4px solid var(--main-color-two);
 }
 
 .page-header .outline-menu-icon, .page-header .outline-menu-close-icon {
@@ -28,10 +28,13 @@
 
 .page-header .navbar .navbar-nav .nav-item .nav-link {
   font-size: 18px;
+  color: #000;
 }
 
 .page-header .navbar .navbar-nav .nav-item .nav-link:hover {
-  color: #0F0;
+  background-color: #000;
+  color: #FFF;
+  border-radius: 5px;
 }
 
 @media (max-width: 991px) {

@@ -30,7 +30,7 @@ export default function Header() {
     }, []);
     return (
         // بداية مكون رأس الصفحة
-        <header className="page-header text-white">
+        <header className="page-header">
             <nav className="navbar navbar-expand-lg pt-3 pb-3">
                 {/* بدء مكون الحاوية من البوتستراب */}
                 <div className="container">
@@ -100,7 +100,7 @@ export default function Header() {
                     </div>
                     <div className="logo-box">
                         <Link className="logo" href="/">
-                            <img src={Logo.src} alt="Logo image !!" width="100" height="75" />
+                            <img src={Logo.src} alt="Logo image !!" width="150" height="75" />
                         </Link>
                     </div>
                 </div>
