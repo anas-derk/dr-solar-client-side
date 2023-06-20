@@ -29,11 +29,12 @@ export default function WhoAreWe() {
             <section className="page-content p-4">
                 {/* بداية مكون الحاوية من البوتستراب */}
                 <div className="container">
+                    <h1 className='text-center'>من نحن ؟</h1>
                     {/* بداية مكون الشبكة من البوتستراب */}
                     <div className="row align-items-center">
                         {/* بداية مكون العمود */}
-                        <div className="col-md-6">
-                            <p className='who-are-we-explain page-content-explain pe-4 ps-4'>
+                        <div className="col-md-6 p-4">
+                            <p className='who-are-we-explain page-content-explain ps-4'>
                                 من خلال دكتور سولار نمنح مفهوم آخر وطريقة جديدة للعناية بالطاقة البديلة، هدفنا الإرتباط بعملائنا، ودائمًا نحو الأفضل لجعل حياتهم أسهل في إدارتها
                                 <br />
                                 <br />

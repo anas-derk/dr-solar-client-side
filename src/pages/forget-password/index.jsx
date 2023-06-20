@@ -121,7 +121,7 @@ export default function ForgetPassword() {
                         <div className="col-lg-6 p-5">
                             {/* بداية كتابة كود ال jsx لعنصر ال html المسمى forget-password-form */}
                             <form
-                                className="forget-password-form bg-white p-4 pt-5 pb-5 text-center mt-4"
+                                className="forget-password-form text-center mt-4"
                                 onSubmit={forgetPassword}
                             >
                                 <h4 className='mb-5'>نسيت كلمة السر !</h4>
@@ -129,7 +129,7 @@ export default function ForgetPassword() {
                                     type="text"
                                     placeholder="البريد الالكتروني"
                                     // في حالة يوجد خطأ بالإدخال نجعل الحواف بلون أحمر
-                                    className={`form-control p-3 ${errors["email"] ? "border border-danger mb-2" : "mb-5"}`}
+                                    className={`form-control p-3 ${errors["email"] ? "border border-danger mb-2" : "mb-4"}`}
                                     onChange={(e) => setEmail(e.target.value.trim())}
                                 />
                                 {/* بداية رسالة الخطأ بالإدخال للمُدخل المحدد */}
@@ -137,7 +137,7 @@ export default function ForgetPassword() {
                                 {/* نهاية رسالة الخطأ بالإدخال للمُدخل المحدد */}
                                 {/* في حالة لم يكن لدينا حالة التحقق في الانتظار ولا يوجد أي خطأ نظهر المكون التالي */}
                                 {!isWaitCheckStatus && !errMsg && <button type='submit' className='btn forget-password-btn w-100 p-3'>إرسال</button>}
-                                <p className='text-danger mt-4 mb-0 note'>تنويه: في حال لم يكن لديك إيميل يرجى التواصل على رقم الواتس
+                                <p className='mt-4 mb-0 note'>تنويه: في حال لم يكن لديك إيميل يرجى التواصل على رقم الواتس
                                     09444444444444444444
                                 </p>
                                 {/* في حالة كان لدينا حالة التحقق في الانتظار ولا يوجد أي خطأ نظهر المكون التالي */}

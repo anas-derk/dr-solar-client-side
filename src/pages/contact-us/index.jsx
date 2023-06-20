@@ -29,35 +29,36 @@ export default function ContactUs() {
             <section className="page-content p-4">
                 {/* بداية مكون الحاوية من البوتستراب */}
                 <div className="container">
+                    <h1 className='text-center'>اتصل بنا ؟</h1>
                     {/* بداية مكون الشبكة من البوتستراب */}
                     <div className="row align-items-center">
                         {/* بداية مكون العمود */}
-                        <div className="col-md-6">
+                        <div className="col-md-6 p-4">
                             <div className="contact-us-content-box">
-                                <p className='how-to-contact-us-explain pe-4 ps-4 mb-5'>
+                                <p className='how-to-contact-us-explain ps-4'>
                                     نهتم بشكل كبير في النمو والتطور والريادة ولنكون الأفضل دائماً نحن بحاجة أن نتعلم منك ما هي الآراء والأفكار أو المفاهيم التي قد تجعلك في راحة أكثر لذا أخبرنا كيف من خلال التواصل معنا.
                                 </p>
-                                <p className='how-to-contact-us-explain pe-4 ps-4 mb-5'>
+                                <p className='how-to-contact-us-explain ps-4 mb-5'>
                                     و كذلك التعليقات والشكاوي ستظل دائمًا مرحبا بها في دكتور سولار
                                 </p>
-                                <p className='how-to-contact-us-explain pe-4 ps-4'>
+                                <p className='how-to-contact-us-explain ps-4'>
                                     كلنا آذان صاغية على :
                                 </p>
-                                <p className='how-to-contact-us-explain pe-4 ps-4 mb-4'>
+                                <p className='how-to-contact-us-explain ps-4'>
                                     E-mail:
                                     <a href="mailto:mrfix.help@gmail.com" className='email-link'> dr.solar.help@gmail.com</a>
                                 </p>
-                                <p className='how-to-contact-us-explain pe-4 ps-4'>
+                                <p className='how-to-contact-us-explain ps-4'>
                                     كافة ما يتعلق بالموقع ومشاكل التسجيل والإشتراك والطلبات عبر الموقع  والاستفسارات حول الاشتراك وكذلك الشكاوي
                                 </p>
-                                <p className='how-to-contact-us-explain pe-4 ps-4 mb-4'>
+                                <p className='how-to-contact-us-explain ps-4 mb-4'>
                                     Mobile/whatsapp: 09444444444444
                                     Mobile/whatsapp: 09444444444444
                                 </p>
-                                <p className='how-to-contact-us-explain pe-4 ps-4'>
+                                <p className='how-to-contact-us-explain ps-4'>
                                     كافة ما يتعلق بالمهام المتفق عليها بعد طلب الخدمة وتعديلها أو إلغائها أو تعديل الوقت أو الاستفسار بتفاصيل تخص إنجاز الخدمة
                                 </p>
-                                <p className='how-to-contact-us-explain pe-4 ps-4 mb-5'>
+                                <p className='how-to-contact-us-explain ps-4 mb-5'>
                                     Mobile/whatsapp: 09444444444444
                                     Mobile/whatsapp: 09444444444444
                                 </p>

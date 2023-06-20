@@ -1,6 +1,6 @@
 .sign-up {
     .page-content {
-        background-color: var(--main-color-five);
+        background-color: var(--main-color-three);
         .container {
             min-height: inherit;
             .sign-up-form {
@@ -12,7 +12,7 @@
                 }
                 .sign-up-btn, .wait-sign-up-btn {
                     background-color: var(--main-color-one);
-                    color: #FFF;
+                    border: 1px solid #000;
                 }
             }
         }

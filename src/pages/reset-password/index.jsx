@@ -160,7 +160,7 @@ export default function ResetPassword() {
                         <div className="col-md-6 p-5 reset-password-form-box">
                             {/* بداية كتابة كود ال jsx لعنصر ال html المسمى reset-password-form */}
                             <form
-                                className="reset-password-form bg-white p-4 text-center"
+                                className="reset-password-form p-4 text-center"
                                 onSubmit={resetPassword}
                             >
                                 <h4 className='mb-4'>إعادة تعيين كلمة السر !</h4>

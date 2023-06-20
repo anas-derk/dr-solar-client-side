@@ -22,14 +22,9 @@
   }
 }
 
-.forget-password .page-content .container .row .forget-password-form {
-  box-shadow: 1px 1px 10px #FFF;
-  border-radius: 15px;
-}
-
 .forget-password .page-content .container .row .forget-password-form .forget-password-btn, .forget-password .page-content .container .row .forget-password-form .wait-check-btn {
   background-color: var(--main-color-one);
-  color: #FFF;
+  border: 1px solid #000;
 }
 
 .forget-password .page-content .container .row .forget-password-form .note {

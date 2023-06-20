@@ -142,12 +142,12 @@ export default function Home({ result }) {
           {/* نهاية كتابة كود ال jsx عنصر السلايدر */}
           {/* بداية كتابة كود ال jsx عنصر الرابط الخاص بصفحة إنشاء حساب */}
           {/* نعرضه في حالة لم يكن يوجد معرّف للمستخدم */}
-          {!userId && <Link href="/sign-up" className='d-block btn start-with-us-btn mt-3 mx-auto pt-2 pe-5 ps-5'>
+          {!userId && <Link href="/sign-up" className='d-block btn start-with-us-btn mt-3 mx-auto pt-3 pb-3 pe-5 ps-5'>
             <span>اشترك الآن</span>
           </Link>}
           {/* نهاية كتابة كود ال jsx عنصر الرابط الخاص بصفحة إنشاء حساب */}
           {/* بداية كتابة كود ال jsx عنصر الرابط الخاص بصفحة طلب خدمة */}
-          {userId && <Link className='d-block btn service-request-btn mt-3 mx-auto pt-2 pe-5 ps-5' href="/service-request">
+          {userId && <Link className='d-block btn service-request-btn mt-3 mx-auto pt-3 pb-3' href="/service-request">
             <span className='ms-2'>طلب الخدمة ( الاشتراك )</span>
           </Link>}
           {/* نهاية كتابة كود ال jsx عنصر الرابط الخاص بصفحة طلب خدمة */}

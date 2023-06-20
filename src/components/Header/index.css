@@ -1,6 +1,6 @@
 .page-header {
   background-color: var(--main-color-one);
-  border-bottom: 4px solid var(--main-color-two);
+  border-bottom: 4px solid #444;
 }
 
 .page-header .outline-menu-icon, .page-header .outline-menu-close-icon {

@@ -18,14 +18,10 @@
   }
 }
 
-.reset-password .page-content .container .row .reset-password-form {
-  box-shadow: 1px 1px 10px #FFF;
-  border-radius: 15px;
-}
-
 .reset-password .page-content .container .row .reset-password-form .reset-password-btn, .reset-password .page-content .container .row .reset-password-form .wait-reset-password-btn {
   background-color: var(--main-color-one);
-  color: #FFF;
+  font-weight: bold;
+  border: 1px solid #000;
 }
 
 .reset-password .page-content .container .row .reset-password-img {

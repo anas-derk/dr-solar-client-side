@@ -155,7 +155,7 @@ export default function Login() {
                         {/* بداية مكون العمود */}
                         <div className="col-lg-7 p-5">
                             {/* بداية كتابة كود ال jsx لعنصر ال html المسمى login-form */}
-                            <form className="login-form bg-white p-4 text-center" onSubmit={login}>
+                            <form className="login-form p-4 text-center" onSubmit={login}>
                                 <h4 className='mb-4'>أهلاً بعودتك .</h4>
                                 <input
                                     type="text"

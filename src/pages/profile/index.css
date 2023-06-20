@@ -1,5 +1,5 @@
 .profile .page-content {
-  background-color: var(--main-color-five);
+  background-color: var(--main-color-three);
 }
 
 .profile .page-content .container {
@@ -16,5 +16,5 @@
 
 .profile .page-content .container .edit-profile-form .edit-profile-btn {
   background-color: var(--main-color-one);
-  color: #FFF;
+  border: 1px solid #000;
 }

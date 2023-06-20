@@ -1,5 +1,5 @@
 .sign-up .page-content {
-  background-color: var(--main-color-five);
+  background-color: var(--main-color-three);
 }
 
 .sign-up .page-content .container {
@@ -16,7 +16,7 @@
 
 .sign-up .page-content .container .sign-up-form .sign-up-btn, .sign-up .page-content .container .sign-up-form .wait-sign-up-btn {
   background-color: var(--main-color-one);
-  color: #FFF;
+  border: 1px solid #000;
 }
 
 .sign-up .popup-box {

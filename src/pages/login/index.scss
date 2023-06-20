@@ -19,11 +19,11 @@
                     }
                 }
                 .login-form{
-                    box-shadow: 1px 1px 10px #FFF;
                     border-radius: 20px;
                     .login-btn, .wait-login-btn{
                         background-color: var(--main-color-one);
-                        color: #FFF;
+                        font-weight: bold;
+                        border: 1px solid #000;
                     }
                 }
                 .login-img{

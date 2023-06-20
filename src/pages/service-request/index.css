@@ -1,5 +1,5 @@
 .service-request .page-content {
-  background-color: var(--main-color-five);
+  background-color: var(--main-color-three);
 }
 
 .service-request .page-content .container {
@@ -29,5 +29,5 @@
 
 .service-request .page-content .container .service-request-form .service-request-btn, .service-request .page-content .container .service-request-form .wait-requesting-btn {
   background-color: var(--main-color-one);
-  color: #FFF;
+  border: 1px solid #000;
 }

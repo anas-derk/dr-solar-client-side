@@ -1,6 +1,6 @@
 .profile{
     .page-content{
-        background-color: var(--main-color-five);
+        background-color: var(--main-color-three);
         .container{
             min-height: inherit;
             .edit-profile-form{
@@ -12,7 +12,7 @@
                 }
                 .edit-profile-btn{
                     background-color: var(--main-color-one);
-                    color: #FFF;
+                    border: 1px solid #000;
                 }
             }
         }
