@@ -4,7 +4,6 @@ import Header from '@/components/Header';
 import { Fragment, useEffect, useState } from 'react';
 import { FiUserPlus } from "react-icons/fi";
 import { RiFileUploadLine } from "react-icons/ri";
-import ourServicesData from "../../../public/data/index";
 import Axios from "axios";
 import { useRouter } from 'next/router';
 import global_functions from "../../../public/global_functions/validations";
@@ -298,7 +297,7 @@ export default function ServiceRequest() {
                 <div className="container">
                     {/* في حالة لم يكن هنالك رسالة خطأ عند طلب بيانات المستخدم فإننا نعرض صفحة طلب الخدمة  */}
                     {!errorInFetchUserDataMsg ? <>
-                        <h1 className='page-title mb-4 text-center'>طلب خدمة</h1>
+                        <h1 className='page-title mb-4 text-center'>طلب الخدمة (الإشتراك)</h1>
                         <form className="service-request-form" onSubmit={serviceRequest}>
                             <select
                                 // في حالة يوجد خطأ بالإدخال نجعل الحواف بلون أحمر
@@ -306,8 +305,8 @@ export default function ServiceRequest() {
                                 onChange={(e) => setRequestType(e.target.value)}
                             >
                                 <option value="" hidden>نوع الطلب</option>
-                                <option value="طلب عادي">طلب عادي</option>
-                                <option value="طلب إسعافي">طلب إسعافي</option>
+                                <option value="طلب عادي">طلب فحص الطاقة البديلة وأدائها</option>
+                                <option value="طلب إسعافي">طلب تنظيف الألواح الشمسية</option>
                             </select>
                             {/* بداية رسالة الخطأ بالإدخال للمُدخل المحدد */}
                             {errors["requestType"] && <p className='error-msg text-danger'>{errors["requestType"]}</p>}
@@ -317,11 +316,13 @@ export default function ServiceRequest() {
                                 className={`form-control p-3 service-type-select ${errors["serviceType"] ? "border border-danger mb-2" : "mb-4"}`}
                                 onChange={(e) => setServiceType(e.target.value)}
                             >
-                                <option value="" hidden>نوع الخدمة</option>
+                                <option value="" hidden>نوع الاشتراك</option>
                                 {/* عمل حلقة تكرارية على بيانات الخدمات بحيث نعرض كل أسماء الخدمات داخل option */}
-                                {ourServicesData.servicesData.map((service, index) => (
-                                    <option value={service.optionValue} key={index}>{service.name}</option>
-                                ))}
+                                <option value="أسبوعي">أسبوعي</option>
+                                <option value="شهري">شهري</option>
+                                <option value="ربع سنوي">ربع سنوي</option>
+                                <option value="نصف سنوي">نصف سنوي</option>
+                                <option value="سنوي">سنوي</option>
                             </select>
                             {/* بداية رسالة الخطأ بالإدخال للمُدخل المحدد */}
                             {errors["serviceType"] && <p className='error-msg text-danger'>{errors["serviceType"]}</p>}
@@ -331,7 +332,7 @@ export default function ServiceRequest() {
                                 {/* بداية مكون العمود */}
                                 <div className="col-md-6">
                                     <textarea
-                                        placeholder="شرح مبسط عن المشكلة التي تواجهها أو شرح مبسط عن الطلب المرغوب بالتحديد، وكذلك يمكن إضافة العنوان بالتفصيل في حالة إختلافه عن العنوان المسجل"
+                                        placeholder="العنوان بشكل دقيق مع ذكر الطابق ، مثال: محافظة دمشق، الميدان ، امتداد شارع المول, بناء الغاردينيا، مقابل محل الملكي ، الطابق الرابع "
                                         // في حالة يوجد خطأ بالإدخال نجعل الحواف بلون أحمر
                                         className={`form-control p-3 explain-and-new-address ${errors["explainAndNewAddress"] ? "border border-danger mb-2" : "mb-4"}`}
                                         onChange={(e) => setExplainAndNewAddress(e.target.value)}
@@ -368,7 +369,7 @@ export default function ServiceRequest() {
                                     {requestType !== "طلب إسعافي" && <>
                                         <input
                                             type="text"
-                                            placeholder="تواريخ الأيام المفضلة لزيارة الورشة"
+                                            placeholder="تواريخ الأيام المفضلة لزيارة الورشة الفاحصة"
                                             // في حالة يوجد خطأ بالإدخال نجعل الحواف بلون أحمر
                                             className={`form-control p-3 ${errors["preferredDateOfVisit"] ? "border border-danger mb-2" : "mb-4"}`}
                                             onChange={(e) => setPreferredDateOfVisit(e.target.value)}
@@ -378,7 +379,7 @@ export default function ServiceRequest() {
                                         {/* نهاية رسالة الخطأ بالإدخال للمُدخل المحدد */}
                                         <input
                                             type="text"
-                                            placeholder="الوقت المفضل لزيارة الورشة"
+                                            placeholder="الأوقات المفضلة لزيارة الورشة الفاحصة"
                                             // في حالة يوجد خطأ بالإدخال نجعل الحواف بلون أحمر
                                             className={`form-control p-3 ${errors["preferredTimeOfVisit"] ? "border border-danger mb-2" : "mb-4"}`}
                                             onChange={(e) => setPreferredTimeOfVisit(e.target.value)}
@@ -402,7 +403,7 @@ export default function ServiceRequest() {
                                         className={`form-control p-3 ${errors["isAlternativeEnergyExist"] ? "border border-danger mb-2" : "mb-4"}`}
                                         onChange={(e) => setIsAlternativeEnergyExist(e.target.value)}
                                     >
-                                        <option value="" hidden>هل يوجد طاقة بديلة ؟</option>
+                                        <option value="" hidden>هل ترغب بتجديد الاشتراك تلقائياً ؟</option>
                                         <option value="yes">نعم</option>
                                         <option value="no">لا</option>
                                     </select>
