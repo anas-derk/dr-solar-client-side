@@ -3,12 +3,12 @@
 }
 
 :root {
-  --main-color-one: #ffcb69;
+  --main-color-one: #ecbc73;
   --main-color-two: #707070;
-  --main-color-three: #f1dca7;
+  --main-color-three: #f8d479;
   --main-color-four: #78e3c8;
-  --main-color-five: #d08c60;
-  --main-color-six: #28e4a5;
+  --main-color-five: #d8a98b;
+  --main-color-six: #f8d479;
 }
 
 ul {
@@ -69,7 +69,7 @@ input, select, textarea {
 }
 
 .shared-pages-with-styles .page-content .container .row > div:first-child {
-  background-color: var(--main-color-three);
+  background-color: var(--main-color-six);
   border-radius: 30px;
 }
 
