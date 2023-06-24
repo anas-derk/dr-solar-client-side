@@ -12,15 +12,15 @@ import { AiOutlineClockCircle } from "react-icons/ai";
 // تعريف دالة صفحة طلب خدمة 
 export default function ServiceRequest() {
     // تعريف المتغيرات المطلوب كــ state
-    const [requestType, setRequestType] = useState("");
     const [serviceType, setServiceType] = useState("");
-    const [explainAndNewAddress, setExplainAndNewAddress] = useState("");
+    const [subType, setSubtype] = useState("");
+    const [address, setAddress] = useState("");
     const [fileList1, setFileList1] = useState("");
     const [fileList2, setFileList2] = useState("");
     const [preferredDateOfVisit, setPreferredDateOfVisit] = useState("");
     const [preferredTimeOfVisit, setPreferredTimeOfVisit] = useState("");
     const [electricityTimes, setElectricityTimes] = useState("");
-    const [isAlternativeEnergyExist, setIsAlternativeEnergyExist] = useState("");
+    const [isWishRenewSubscription, setisWishRenewSubscription] = useState("");
     const [userId, setUserId] = useState("");
     const [userData, setUserData] = useState("");
     const [errorInFetchUserDataMsg, setErrorInFetchUserDataMsg] = useState("");
@@ -30,17 +30,8 @@ export default function ServiceRequest() {
     const [errMsg, setErrorMsg] = useState("");
     // تعريف كائن يحتوي وصف الملفات بحيث نعرض تفاصيل عنها بحسب نوع الخدمة التي يحددها المستخدم لاحقاً
     const filesCaption = {
-        "الكهربائيات والالكترونيات": ["صور عن الأداة المعطلة", "صور عن مكان العطل"],
-        "الصحية ( السباكة )": ["صور عن الأداة المعطلة", "صور عن مكان العطل"],
-        "الطاقة البديلة": ["صور عن الأداة المعطلة", "صور عن مكان العطل"],
-        "الخشبيات والمفروشات": ["صور عن الأداة المعطلة", "صور عن مكان العطل"],
-        "الألمنيوم": ["صور عن الأداة المعطلة", "صور عن مكان العطل"],
-        "دهان وعزل": ["صور عن المكان المُراد دهانه أو عزله"],
-        "نقل الأثاث": ["صور الأثاث المطلوب نقله"],
-        "التنظيف": ["صور عن المكان المراد تنظيفه"],
-        "صيانة المنازل المؤجرة قبل الانتقال إليها": ["صور عن المنزل المُراد استئجاره", "صور عن مكان الأعطال الظاهرة"],
-        "اقتراحات تغيير ديكور واستغلال المساحات": ["صور عن المكان المُراد تغيير ديكوره"],
-        "استفسار عن تكلفة الإصلاح": ["صور عن الأداة المعطلة", "صور عن مكان العطل"],
+        "طلب فحص": ["صورة الألواح الشمسية مع صورة اللصاقة الخلفية", "صورة الانفرتر مع صورة اللصاقة التي عليه"],
+        "طلب تنظيف": ["صورة الألواح الشمسية مع صورة اللصاقة الخلفية", "صورة الانفرتر مع صورة اللصاقة التي عليه"],
     }
     // تعريف راوتر لاستخدامه في التعامل مع روابط الصفحات
     const router = useRouter();
@@ -89,15 +80,6 @@ export default function ServiceRequest() {
         const errorsObject = global_functions.inputValuesValidation(
             [
                 {
-                    name: "requestType",
-                    value: requestType,
-                    rules: {
-                        isRequired: {
-                            msg: "عذراً ، لا يجب أن يكون الحقل فارغاً !!",
-                        },
-                    },
-                },
-                {
                     name: "serviceType",
                     value: serviceType,
                     rules: {
@@ -107,8 +89,17 @@ export default function ServiceRequest() {
                     },
                 },
                 {
-                    name: "explainAndNewAddress",
-                    value: explainAndNewAddress,
+                    name: "subType",
+                    value: subType,
+                    rules: {
+                        isRequired: {
+                            msg: "عذراً ، لا يجب أن يكون الحقل فارغاً !!",
+                        },
+                    },
+                },
+                {
+                    name: "address",
+                    value: address,
                     rules: {
                         isRequired: {
                             msg: "عذراً ، لا يجب أن يكون الحقل فارغاً !!",
@@ -126,13 +117,8 @@ export default function ServiceRequest() {
                             msg: "عذراً ، يجب أن يكون الملف أو الملفات صور من امتداد png أو jpg !!"
                         },
                     },
-                },
-                serviceType !== "دهان وعزل"
-                && serviceType !== "نقل الأثاث"
-                && serviceType !== "التنظيف"
-                && serviceType !== "صيانة المنازل المؤجرة قبل الانتقال إليها"
-                && serviceType !== "اقتراحات تغيير ديكور واستغلال المساحات"  
-                ? {
+                }, 
+                {
                     name: "fileList2",
                     value: fileList2,
                     rules: {
@@ -142,12 +128,6 @@ export default function ServiceRequest() {
                         isImages: {
                             msg: "عذراً ، يجب أن يكون الملف أو الملفات صور من امتداد png أو jpg !!"
                         },
-                    },
-                }: {
-                    name: "fileList2",
-                    value: fileList2,
-                    rules: {
-                        isRequired: undefined,
                     },
                 },
                 {
@@ -178,17 +158,8 @@ export default function ServiceRequest() {
                     },
                 },
                 {
-                    name: "isAlternativeEnergyExist",
-                    value: isAlternativeEnergyExist,
-                    rules: {
-                        isRequired: {
-                            msg: "عذراً ، لا يجب أن يكون الحقل فارغاً !!",
-                        },
-                    },
-                },
-                {
-                    name: "isAlternativeEnergyExist",
-                    value: isAlternativeEnergyExist,
+                    name: "isWishRenewSubscription",
+                    value: isWishRenewSubscription,
                     rules: {
                         isRequired: {
                             msg: "عذراً ، لا يجب أن يكون الحقل فارغاً !!",
@@ -202,7 +173,7 @@ export default function ServiceRequest() {
         // التحقق من أنّ الكائن الخاص بالأخطاء فارغ أي لا يوجد أخطاء
         // أو التحقق من كون نوع الطلب إسعافي + عدد الأخطاء هو 2 ( للدلالة على أنّ الأخطاء هي عدم وجود بيانات لتاريخ يوم الزيارة المفضل والوقت المفضل للزياة )
         if (Object.keys(errorsObject).length == 0 ||
-            (requestType === "طلب إسعافي"
+            (serviceType === "طلب تنظيف"
                 && Object.keys(errorsObject).length == 2
                 && errorsObject["preferredDateOfVisit"] === "عذراً ، لا يجب أن يكون الحقل فارغاً !!"
                 && errorsObject["preferredTimeOfVisit"] === "عذراً ، لا يجب أن يكون الحقل فارغاً !!"
@@ -212,9 +183,9 @@ export default function ServiceRequest() {
             setIsRequestingStatus(true);
             // إنشاء كائن من ال formData لتخزين بيانات الفورم قبل إرساله مع الطلب في جسم الطلب وذلك بسبب وجود ملفات
             let formData = new FormData();
-            formData.append("requestType", requestType);
             formData.append("serviceType", serviceType);
-            formData.append("explainAndNewAddress", explainAndNewAddress);
+            formData.append("subType", subType);
+            formData.append("address", address);
             // إضافة كل الملفات إلى ال formData
             for (let i = 0; i < fileList1.length; i++) {
                 formData.append(`file${i}`, fileList1[i]);
@@ -223,13 +194,13 @@ export default function ServiceRequest() {
                 formData.append(`file${i}`, fileList2[i]);
             }
             // التحقق من نوع الطلب بحيث نضيف بيانات حقلي تاريخ اليوم المفضل للزيارة ووقت الزيارة المفضل في حالة نوع الطلب عادي فقط ( كون الطلب الإسعافي ليس بحاجتهم )
-            if (requestType === "طلب عادي") {
+            if (serviceType === "طلب فحص") {
                 formData.append("preferredDateOfVisit", preferredDateOfVisit);
                 formData.append("preferredTimeOfVisit", preferredTimeOfVisit);
             }
             // إضافة باقي بيانات الحقول إلى الـ formDat
             formData.append("electricityTimes", electricityTimes);
-            formData.append("isAlternativeEnergyExist", isAlternativeEnergyExist);
+            formData.append("isWishRenewSubscription", isWishRenewSubscription);
             formData.append("userId", userId);
             // بداية محاولة إرسال الطلب
             try {
@@ -301,20 +272,20 @@ export default function ServiceRequest() {
                         <form className="service-request-form" onSubmit={serviceRequest}>
                             <select
                                 // في حالة يوجد خطأ بالإدخال نجعل الحواف بلون أحمر
-                                className={`form-control p-3 request-type-select ${errors["requestType"] ? "border border-danger mb-2" : "mb-4"}`}
-                                onChange={(e) => setRequestType(e.target.value)}
+                                className={`form-control p-3 request-type-select ${errors["serviceType"] ? "border border-danger mb-2" : "mb-4"}`}
+                                onChange={(e) => setServiceType(e.target.value)}
                             >
-                                <option value="" hidden>نوع الطلب</option>
-                                <option value="طلب عادي">طلب فحص الطاقة البديلة وأدائها</option>
-                                <option value="طلب إسعافي">طلب تنظيف الألواح الشمسية</option>
+                                <option value="" hidden>نوع الخدمة</option>
+                                <option value="طلب فحص">طلب فحص الطاقة البديلة وأدائها</option>
+                                <option value="طلب تنظيف">طلب تنظيف الألواح الشمسية</option>
                             </select>
                             {/* بداية رسالة الخطأ بالإدخال للمُدخل المحدد */}
-                            {errors["requestType"] && <p className='error-msg text-danger'>{errors["requestType"]}</p>}
+                            {errors["serviceType"] && <p className='error-msg text-danger'>{errors["serviceType"]}</p>}
                             {/* نهاية رسالة الخطأ بالإدخال للمُدخل المحدد */}
                             <select
                                 // في حالة يوجد خطأ بالإدخال نجعل الحواف بلون أحمر
-                                className={`form-control p-3 service-type-select ${errors["serviceType"] ? "border border-danger mb-2" : "mb-4"}`}
-                                onChange={(e) => setServiceType(e.target.value)}
+                                className={`form-control p-3 service-type-select ${errors["subType"] ? "border border-danger mb-2" : "mb-4"}`}
+                                onChange={(e) => setSubtype(e.target.value)}
                             >
                                 <option value="" hidden>نوع الاشتراك</option>
                                 {/* عمل حلقة تكرارية على بيانات الخدمات بحيث نعرض كل أسماء الخدمات داخل option */}
@@ -325,7 +296,7 @@ export default function ServiceRequest() {
                                 <option value="سنوي">سنوي</option>
                             </select>
                             {/* بداية رسالة الخطأ بالإدخال للمُدخل المحدد */}
-                            {errors["serviceType"] && <p className='error-msg text-danger'>{errors["serviceType"]}</p>}
+                            {errors["subType"] && <p className='error-msg text-danger'>{errors["subType"]}</p>}
                             {/* نهاية رسالة الخطأ بالإدخال للمُدخل المحدد */}
                             {/* بداية مكون الشبكة من البوتستراب */}
                             <div className="row">
@@ -334,14 +305,14 @@ export default function ServiceRequest() {
                                     <textarea
                                         placeholder="العنوان بشكل دقيق مع ذكر الطابق ، مثال: محافظة دمشق، الميدان ، امتداد شارع المول, بناء الغاردينيا، مقابل محل الملكي ، الطابق الرابع "
                                         // في حالة يوجد خطأ بالإدخال نجعل الحواف بلون أحمر
-                                        className={`form-control p-3 explain-and-new-address ${errors["explainAndNewAddress"] ? "border border-danger mb-2" : "mb-4"}`}
-                                        onChange={(e) => setExplainAndNewAddress(e.target.value)}
+                                        className={`form-control p-3 explain-and-new-address ${errors["address"] ? "border border-danger mb-2" : "mb-4"}`}
+                                        onChange={(e) => setAddress(e.target.value)}
                                     ></textarea>
                                     {/* بداية رسالة الخطأ بالإدخال للمُدخل المحدد */}
-                                    {errors["explainAndNewAddress"] && <p className='error-msg text-danger'>{errors["explainAndNewAddress"]}</p>}
+                                    {errors["address"] && <p className='error-msg text-danger'>{errors["address"]}</p>}
                                     {/* نهاية رسالة الخطأ بالإدخال للمُدخل المحدد */}
                                     {/* عرض حقل رفع الملفات فقط عندما يختار المستخدم نوع الخدمة وبناءً على نوع الخدمة يظهر له وصف الملفات المراد رفعها وعدد الحقول */}
-                                    {serviceType !== "" && filesCaption[serviceType].map((el, index) => (
+                                    {serviceType !== "" && subType !== "" && filesCaption[serviceType].map((el, index) => (
                                         <Fragment key={index}>
                                             {/* في حالة يوجد خطأ بالإدخال نجعل الحواف بلون أحمر */}
                                             <div className={`file-box form-control p-3 ${errors[`fileList${index + 1}`] ? "border border-danger mb-2" : "mb-4"}`}>
@@ -366,7 +337,7 @@ export default function ServiceRequest() {
                                 {/* بداية مكون العمود */}
                                 <div className="col-md-6">
                                     {/* في حالة الطلب غير إسعافي عرض الحقول التالية */}
-                                    {requestType !== "طلب إسعافي" && <>
+                                    {serviceType !== "طلب تنظيف" && <>
                                         <input
                                             type="text"
                                             placeholder="تواريخ الأيام المفضلة لزيارة الورشة الفاحصة"
@@ -400,15 +371,15 @@ export default function ServiceRequest() {
                                     {/* نهاية رسالة الخطأ بالإدخال للمُدخل المحدد */}
                                     <select
                                         // في حالة يوجد خطأ بالإدخال نجعل الحواف بلون أحمر
-                                        className={`form-control p-3 ${errors["isAlternativeEnergyExist"] ? "border border-danger mb-2" : "mb-4"}`}
-                                        onChange={(e) => setIsAlternativeEnergyExist(e.target.value)}
+                                        className={`form-control p-3 ${errors["isWishRenewSubscription"] ? "border border-danger mb-2" : "mb-4"}`}
+                                        onChange={(e) => setisWishRenewSubscription(e.target.value)}
                                     >
                                         <option value="" hidden>هل ترغب بتجديد الاشتراك تلقائياً ؟</option>
                                         <option value="yes">نعم</option>
                                         <option value="no">لا</option>
                                     </select>
                                     {/* بداية رسالة الخطأ بالإدخال للمُدخل المحدد */}
-                                    {errors["isAlternativeEnergyExist"] && <p className='error-msg text-danger'>{errors["isAlternativeEnergyExist"]}</p>}
+                                    {errors["isWishRenewSubscription"] && <p className='error-msg text-danger'>{errors["isWishRenewSubscription"]}</p>}
                                     {/* نهاية رسالة الخطأ بالإدخال للمُدخل المحدد */}
                                 </div>
                                 {/* نهاية مكون العمود */}
