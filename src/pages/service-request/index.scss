@@ -3,7 +3,11 @@
         background-color: var(--main-color-six);
         .container{
             min-height: inherit;
+            .page-title{
+                font-family: var(--font-family-two);
+            }
             .service-request-form{
+                font-family: var(--font-family-one);
                 .file-box{
                     height: 58px;
                     .file-label{
@@ -22,6 +26,7 @@
                 }
                 .service-request-btn, .wait-requesting-btn{
                     background-color: var(--main-color-one);
+                    font-size: 19px;
                     color: #FFF;
                 }
             }

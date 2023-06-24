@@ -235,7 +235,7 @@ export default function Profile() {
             <section className="page-content pt-4 pb-4">
                 {/* بداية مكون الحاوية من البوتستراب */}
                 <div className="container">
-                    <h1 className='page-title mb-4'>الملف الشخصي</h1>
+                    <h1 className='page-title mb-4 text-center'>الملف الشخصي</h1>
                     {/* في حالة لا يوجد خطأ أنّ المستخدم غير موجود ، نعرض المكون التالي وإلا نعرض رسالة خطأ */}
                     {!userNotFoundError ? <form className="edit-profile-form" onSubmit={updateProfile}>
                         {/* بداية مكون الشبكة من البوتستراب */}

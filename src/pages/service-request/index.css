@@ -6,6 +6,14 @@
   min-height: inherit;
 }
 
+.service-request .page-content .container .page-title {
+  font-family: var(--font-family-two);
+}
+
+.service-request .page-content .container .service-request-form {
+  font-family: var(--font-family-one);
+}
+
 .service-request .page-content .container .service-request-form .file-box {
   height: 58px;
 }
@@ -29,5 +37,6 @@
 
 .service-request .page-content .container .service-request-form .service-request-btn, .service-request .page-content .container .service-request-form .wait-requesting-btn {
   background-color: var(--main-color-one);
+  font-size: 19px;
   color: #FFF;
 }

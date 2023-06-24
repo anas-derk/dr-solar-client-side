@@ -200,7 +200,7 @@ export default function Signup() {
             <section className="page-content pt-4 pb-4">
                 {/* بداية مكون الحاوية من البوتستراب */}
                 <div className="container">
-                    <h1 className='page-title mb-4'>أهلاً وسهلاً بك في دكتور سولار</h1>
+                    <h1 className='page-title mb-4 text-center'>أهلاً وسهلاً بك في دكتور سولار</h1>
                     <form className="sign-up-form" onSubmit={createAccount}>
                         {/* بداية مكون الشبكة من البوتستراب */}
                         <div className="row">

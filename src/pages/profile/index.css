@@ -6,6 +6,14 @@
   min-height: inherit;
 }
 
+.profile .page-content .container .page-title {
+  font-family: var(--font-family-two);
+}
+
+.profile .page-content .container .edit-profile-form {
+  font-family: var(--font-family-one);
+}
+
 .profile .page-content .container .edit-profile-form textarea {
   resize: none;
 }
@@ -17,4 +25,5 @@
 .profile .page-content .container .edit-profile-form .edit-profile-btn {
   background-color: var(--main-color-one);
   color: #FFF;
+  font-size: 19px;
 }

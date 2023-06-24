@@ -3,7 +3,11 @@
         background-color: var(--main-color-six);
         .container{
             min-height: inherit;
+            .page-title{
+                font-family: var(--font-family-two);
+            }
             .edit-profile-form{
+                font-family: var(--font-family-one);
                 textarea{
                     resize: none;
                 }
@@ -13,6 +17,7 @@
                 .edit-profile-btn{
                     background-color: var(--main-color-one);
                     color: #FFF;
+                    font-size: 19px;
                 }
             }
         }

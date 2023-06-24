@@ -3,7 +3,11 @@
         background-color: var(--main-color-six);
         .container {
             min-height: inherit;
+            .page-title{
+                font-family: var(--font-family-two);
+            }
             .sign-up-form {
+                font-family: var(--font-family-one);
                 textarea {
                     resize: none;
                 }
@@ -12,7 +16,9 @@
                 }
                 .sign-up-btn, .wait-sign-up-btn {
                     background-color: var(--main-color-one);
-                    border: 1px solid #000;
+                    font-family: var(--font-family-two);
+                    font-size: 19px;
+                    color: #FFF;
                 }
             }
         }
