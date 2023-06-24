@@ -6,8 +6,23 @@
   min-height: inherit;
 }
 
-.service-request .page-content .container .page-title {
+@media (max-width: 767px) {
+  .service-request .page-content .container .row {
+    gap: 25px;
+  }
+}
+
+.service-request .page-content .container .row .page-title {
   font-family: var(--font-family-two);
+}
+
+.service-request .page-content .container .row .note-paragraph {
+  font-family: var(--font-family-one);
+  background-color: #2C7C40;
+  color: #FFF;
+  border-radius: 15px;
+  line-height: 1.5;
+  font-size: 18px;
 }
 
 .service-request .page-content .container .service-request-form {

@@ -8,6 +8,7 @@ import Axios from "axios";
 import { useRouter } from 'next/router';
 import global_functions from "../../../public/global_functions/validations";
 import { AiOutlineClockCircle } from "react-icons/ai";
+import RequestServiceImage from "../../../public/images/RequestService/request-service.png";
 
 // تعريف دالة صفحة طلب خدمة 
 export default function ServiceRequest() {
@@ -119,24 +120,24 @@ export default function ServiceRequest() {
                     },
                 },
                 serviceType !== "طلب تنظيف" ?
-                {
-                    name: "fileList2",
-                    value: fileList2,
-                    rules: {
-                        isRequired: {
-                            msg: "عذراً ، لا يجب أن يكون الحقل فارغاً !!",
+                    {
+                        name: "fileList2",
+                        value: fileList2,
+                        rules: {
+                            isRequired: {
+                                msg: "عذراً ، لا يجب أن يكون الحقل فارغاً !!",
+                            },
+                            isImages: {
+                                msg: "عذراً ، يجب أن يكون الملف أو الملفات صور من امتداد png أو jpg !!"
+                            },
                         },
-                        isImages: {
-                            msg: "عذراً ، يجب أن يكون الملف أو الملفات صور من امتداد png أو jpg !!"
+                    } : {
+                        name: "fileList2",
+                        value: fileList2,
+                        rules: {
+                            isRequired: undefined,
                         },
                     },
-                } : {
-                    name: "fileList2",
-                    value: fileList2,
-                    rules: {
-                        isRequired: undefined,
-                    },
-                },
                 {
                     name: "preferredDateOfVisit",
                     value: preferredDateOfVisit,
@@ -230,8 +231,8 @@ export default function ServiceRequest() {
                         setIsSuccessfulyStatus(true);
                         // تعيين مؤقت ليتم تنفيذ تعليمات بعد ثانيتين
                         setTimeout(() => {
-                        // تعديل قيمة ال state المسماة isSuccessfulyStatus لتصبح false من أجل استخدامه لاحقاً في إخفاء رسالة النجاح
-                        setIsSuccessfulyStatus(false);
+                            // تعديل قيمة ال state المسماة isSuccessfulyStatus لتصبح false من أجل استخدامه لاحقاً في إخفاء رسالة النجاح
+                            setIsSuccessfulyStatus(false);
                             // تعيين مؤقت ليتم تنفيذ تعليمات بعد ثانية ونصف
                             setTimeout(() => {
                                 // إعادة تحميل الصفحة من أجل حذف بيانات الحقول لإتاحة الإمكانية للمستخدم من إرسال طلب جديد إن أراد
@@ -275,7 +276,21 @@ export default function ServiceRequest() {
                 <div className="container">
                     {/* في حالة لم يكن هنالك رسالة خطأ عند طلب بيانات المستخدم فإننا نعرض صفحة طلب الخدمة  */}
                     {!errorInFetchUserDataMsg ? <>
-                        <h1 className='page-title mb-4 text-center'>طلب الخدمة (الإشتراك)</h1>
+                        {/* بداية مكون الشبكة من البوتستراب */}
+                        <div className="row mb-4 align-items-center text-center">
+                            <div className="col-md-3">
+                                <img src={RequestServiceImage.src} alt="صورة طلب خدمة !" width="135" height="135" />
+                            </div>
+                            <div className="col-md-6">
+                                <h1 className='page-title m-0 text-center'>طلب الخدمة (الإشتراك)</h1>
+                            </div>
+                            <div className="col-md-3">
+                                <p className='note-paragraph text-center p-2 m-0'>
+                                    ملاحظة هامة: كل الشروحات التي تتعلق بالخدمة والإشتراك والأجور مذكورة في تبويبة (من نحن)
+                                </p>
+                            </div>
+                        </div>
+                        {/* نهاية مكون الشبكة من البوتستراب */}
                         <form className="service-request-form" onSubmit={serviceRequest}>
                             <select
                                 // في حالة يوجد خطأ بالإدخال نجعل الحواف بلون أحمر
