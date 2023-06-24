@@ -6,7 +6,9 @@
             line-height: 2;
             font-size: 20px;
             margin-bottom: 0;
-            color: #FFF;
+            font-family: var(--font-family-one);
+            font-size: 22;
+            color: #004F59;
             @media (max-width: 767px) {
                 text-align: center;
                 font-size: 18px;

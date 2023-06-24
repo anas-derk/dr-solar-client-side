@@ -1,13 +1,12 @@
-*{
-    font-family: 'Tajawal', sans-serif;
-}
 :root{
-    --main-color-one: rgba(107, 144,128, 100%);
+    --main-color-one: rgba(132, 169,140, 100%);
     --main-color-two: rgba(112, 112, 112, 100%);
     --main-color-three: rgba(183, 228,199, 100%);
     --main-color-four: rgba(183, 228, 199, 50%);
-    --main-color-five: rgba(64, 145, 108, 100%);
+    --main-color-five: rgba(64, 145, 108, 80%);
     --main-color-six: rgba(183, 228,199, 100%);
+    --font-family-one: "Tajawal", sans-serif;
+    --font-family-two: "Cairo", sans-serif;
 }
 
 ul{
@@ -34,7 +33,7 @@ a{
 }
 
 ::-webkit-scrollbar-thumb{
-    background-color: #000;
+    background-color: var(--main-color-one);
 }
 
 input, select, textarea{
@@ -60,9 +59,10 @@ input, select, textarea{
     .page-content{
         .container{
             min-height: inherit;
+            font-family: var(--font-family-two);
             .row{
                 > div:first-child{
-                    background-color: var(--main-color-five);
+                    background-color: var(--main-color-six);
                     border-radius: 30px;
                 }
                 min-height: inherit;
@@ -80,13 +80,14 @@ input, select, textarea{
                     }
                 }
                 .page-content-explain{
-                    text-align: justify;
                     line-height: 2;
                     font-size: 20px;
                     margin-bottom: 0;
                     height: 400px;
                     overflow-y: auto;
-                    color: #FFF;
+                    color: #004F59;
+                    font-family: var(--font-family-one);
+                    font-size: 22px;
                     @media (max-width: 767px) {
                         text-align: center;
                         font-size: 18px;

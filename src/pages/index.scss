@@ -1,4 +1,5 @@
 .home{
+    font-family: var(--font-family-one);
     .page-content{
         .ads{
             background-color: var(--main-color-three);
@@ -50,9 +51,10 @@
                                     }
                                     .slider-content-explain{
                                         p{
-                                            font-family: 'Lemonada', cursive;
+                                            font-family: "Tajawal", sans-serif;
                                             line-height: 2;
                                             margin-bottom: 20px;
+                                            font-size: 25px;
                                             &:first-child {
                                                 @media (max-width: 767px) {
                                                     &.exeption-paragraph-3{
@@ -69,7 +71,7 @@
                                                 margin-bottom: 0;
                                                 @media (max-width: 767px) {
                                                     &.exeption-paragraph{
-                                                        line-height: 3;
+                                                        line-height: 2;
                                                     }
                                                 }
                                             }
@@ -82,7 +84,7 @@
                                     .image-box{
                                         text-align: center;
                                         .home-paragraph{
-                                            font-size: 28px;
+                                            font-size: 26px;
                                             @media (max-width: 400px) {
                                                 margin-bottom: 10px;
                                             }
@@ -114,6 +116,7 @@
             font-size: 20px;
             font-family: 'Cairo', sans-serif;
             color: #FFF;
+            font-family: var(--font-family-two);
         }
     }
 }

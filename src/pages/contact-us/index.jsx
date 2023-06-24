@@ -29,7 +29,7 @@ export default function ContactUs() {
             <section className="page-content p-4">
                 {/* بداية مكون الحاوية من البوتستراب */}
                 <div className="container">
-                    <h1 className='text-center'>اتصل بنا ؟</h1>
+                    <h1 className='text-center'>اتصل بنا</h1>
                     {/* بداية مكون الشبكة من البوتستراب */}
                     <div className="row align-items-center">
                         {/* بداية مكون العمود */}

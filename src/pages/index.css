@@ -1,3 +1,7 @@
+.home {
+  font-family: var(--font-family-one);
+}
+
 .home .page-content .ads {
   background-color: var(--main-color-three);
   cursor: pointer;
@@ -68,9 +72,10 @@
 }
 
 .home .page-content .introduction .carousel .carousel-inner .carousel-item .carousel-caption .container .row .slider-content-explain p {
-  font-family: 'Lemonada', cursive;
+  font-family: "Tajawal", sans-serif;
   line-height: 2;
   margin-bottom: 20px;
+  font-size: 25px;
 }
 
 @media (max-width: 767px) {
@@ -91,7 +96,7 @@
 
 @media (max-width: 767px) {
   .home .page-content .introduction .carousel .carousel-inner .carousel-item .carousel-caption .container .row .slider-content-explain p:last-child.exeption-paragraph {
-    line-height: 3;
+    line-height: 2;
   }
 }
 
@@ -106,7 +111,7 @@
 }
 
 .home .page-content .introduction .carousel .carousel-inner .carousel-item .carousel-caption .container .row .image-box .home-paragraph {
-  font-size: 28px;
+  font-size: 26px;
 }
 
 @media (max-width: 400px) {
@@ -136,4 +141,5 @@
   font-size: 20px;
   font-family: 'Cairo', sans-serif;
   color: #FFF;
+  font-family: var(--font-family-two);
 }

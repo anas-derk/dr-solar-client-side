@@ -1,14 +1,12 @@
-* {
-  font-family: 'Tajawal', sans-serif;
-}
-
 :root {
-  --main-color-one: #6b9080;
+  --main-color-one: #84a98c;
   --main-color-two: #707070;
   --main-color-three: #b7e4c7;
   --main-color-four: #b7e4c7;
   --main-color-five: #40916c;
   --main-color-six: #b7e4c7;
+  --font-family-one: "Tajawal", sans-serif;
+  --font-family-two: "Cairo", sans-serif;
 }
 
 ul {
@@ -36,7 +34,7 @@ a {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #000;
+  background-color: var(--main-color-one);
 }
 
 input, select, textarea {
@@ -62,6 +60,7 @@ input, select, textarea {
 
 .shared-pages-with-styles .page-content .container {
   min-height: inherit;
+  font-family: var(--font-family-two);
 }
 
 .shared-pages-with-styles .page-content .container .row {
@@ -69,7 +68,7 @@ input, select, textarea {
 }
 
 .shared-pages-with-styles .page-content .container .row > div:first-child {
-  background-color: var(--main-color-five);
+  background-color: var(--main-color-six);
   border-radius: 30px;
 }
 
@@ -89,13 +88,14 @@ input, select, textarea {
 }
 
 .shared-pages-with-styles .page-content .container .row .page-content-explain {
-  text-align: justify;
   line-height: 2;
   font-size: 20px;
   margin-bottom: 0;
   height: 400px;
   overflow-y: auto;
-  color: #FFF;
+  color: #004F59;
+  font-family: var(--font-family-one);
+  font-size: 22px;
 }
 
 @media (max-width: 767px) {
