@@ -1,3 +1,9 @@
+@media (max-width: 767px) {
+  .login .page-content {
+    padding: 0.5rem !important;
+  }
+}
+
 .login .page-content .container {
   min-height: inherit;
 }
@@ -15,7 +21,7 @@
 @media (max-width: 991px) {
   .login .page-content .container .row > div:first-child {
     order: 2;
-    padding-top: 0 !important;
+    padding: 0.5rem !important;
   }
   .login .page-content .container .row > div:last-child {
     text-align: center;
@@ -37,9 +43,10 @@
 
 .login .page-content .container .row .login-form .login-btn, .login .page-content .container .row .login-form .wait-login-btn {
   background-color: var(--main-color-one);
-  font-weight: bold;
+  color: #fff;
   border: 1px solid #000;
   font-family: 'Cairo', sans-serif;
+  font-size: 19px;
 }
 
 .login .page-content .container .row .login-img {

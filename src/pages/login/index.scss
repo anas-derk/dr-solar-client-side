@@ -1,5 +1,8 @@
 .login{
     .page-content{
+        @media (max-width: 767px) {
+            padding: 0.5rem !important;
+        }
         .container{
             min-height: inherit;
             .row{
@@ -12,7 +15,7 @@
                 @media (max-width: 991px) {
                     > div:first-child{
                         order: 2;
-                        padding-top: 0 !important;
+                        padding: 0.5rem !important;
                     }
                     > div:last-child{
                         text-align: center;
@@ -29,9 +32,11 @@
                     }
                     .login-btn, .wait-login-btn{
                         background-color: var(--main-color-one);
-                        font-weight: bold;
+                        color: #fff;
+                        // font-weight: bold;
                         border: 1px solid #000;
                         font-family: 'Cairo', sans-serif;
+                        font-size: 19px;
                     }
                 }
                 .login-img{

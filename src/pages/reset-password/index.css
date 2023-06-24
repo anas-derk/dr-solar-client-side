@@ -1,3 +1,9 @@
+@media (max-width: 767px) {
+  .reset-password .page-content {
+    padding: 0.5rem !important;
+  }
+}
+
 .reset-password .page-content .container {
   min-height: inherit;
 }
@@ -23,11 +29,17 @@
   font-size: 30px;
 }
 
+@media (max-width: 404px) {
+  .reset-password .page-content .container .row .reset-password-form .welcome-msg {
+    font-size: 22px;
+  }
+}
+
 .reset-password .page-content .container .row .reset-password-form .reset-password-btn, .reset-password .page-content .container .row .reset-password-form .wait-reset-password-btn {
   background-color: var(--main-color-one);
-  font-weight: bold;
-  border: 1px solid #000;
+  color: #FFF;
   font-family: 'Cairo', sans-serif;
+  font-size: 19px;
 }
 
 .reset-password .page-content .container .row .reset-password-img {

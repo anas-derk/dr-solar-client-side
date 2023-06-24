@@ -156,7 +156,7 @@ export default function Login() {
                         <div className="col-lg-7 p-4">
                             {/* بداية كتابة كود ال jsx لعنصر ال html المسمى login-form */}
                             <form className="login-form p-3 text-center" onSubmit={login}>
-                                <h4 className='mb-4 welcome-msg'>أهلاً بعودتك .</h4>
+                                <h4 className='mb-4 welcome-msg'>أهلاً بعودتك</h4>
                                 <input
                                     type="text"
                                     placeholder="البريد الالكتروني أو رقم الجوال"
@@ -203,7 +203,7 @@ export default function Login() {
                         </div>
                         {/* نهاية مكون العمود */}
                         {/* بداية مكون العمود */}
-                        <div className="col-lg-5">
+                        <div className="col-lg-5 text-center">
                             <img src={loginImage.src} alt="Login Image !!" className='login-img' />
                         </div>
                         {/* نهاية مكون العمود */}

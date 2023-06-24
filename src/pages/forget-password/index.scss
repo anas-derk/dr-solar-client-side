@@ -1,5 +1,8 @@
 .forget-password{
     .page-content{
+        @media (max-width: 767px) {
+            padding: 0.5rem !important;
+        }
         .container{
             min-height: inherit;
             .row{
@@ -10,6 +13,7 @@
                     }
                 }
                 @media (max-width: 991px) {
+                    gap: 30px;
                     > div:first-child{
                         order: 2;
                         padding-top: 0 !important;
@@ -22,15 +26,16 @@
                     .welcome-msg{
                         font-family: 'Cairo', sans-serif;
                         font-size: 30px;
+                        margin-bottom: 40px;
                     }
                     .forget-password-btn, .wait-check-btn{
                         background-color: var(--main-color-one);
-                        border: 1px solid #000;
-                        font-weight: bold;
+                        color: #FFF;
+                        font-size: 19px;
                         font-family: 'Cairo', sans-serif;
                     }
                     .note{
-                        text-align: justify;
+                        text-align: center;
                         line-height: 2.2;
                         font-size: 18px;
                         font-weight: bold;

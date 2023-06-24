@@ -1,5 +1,8 @@
 .reset-password{
     .page-content{
+        @media (max-width: 767px) {
+            padding: 0.5rem !important;
+        }
         .container{
             min-height: inherit;
             .row{
@@ -16,12 +19,15 @@
                     .welcome-msg{
                         font-family: 'Cairo', sans-serif;
                         font-size: 30px;
+                        @media (max-width: 404px) {
+                            font-size: 22px;
+                        }
                     }
                     .reset-password-btn, .wait-reset-password-btn{
                         background-color: var(--main-color-one);
-                        font-weight: bold;
-                        border: 1px solid #000;
+                        color: #FFF;
                         font-family: 'Cairo', sans-serif;
+                        font-size: 19px;
                     }
                 }
                 .reset-password-img{

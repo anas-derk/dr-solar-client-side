@@ -118,13 +118,13 @@ export default function ForgetPassword() {
                     {/* بداية مكون الشبكة من البوتستراب */}
                     <div className="row align-items-center">
                         {/* بداية مكون العمود */}
-                        <div className="col-lg-6 p-5">
+                        <div className="col-lg-6 p-4">
                             {/* بداية كتابة كود ال jsx لعنصر ال html المسمى forget-password-form */}
                             <form
-                                className="forget-password-form p-4 text-center mt-4"
+                                className="forget-password-form p-4 text-center"
                                 onSubmit={forgetPassword}
                             >
-                                <h4 className='mb-5 welcome-msg'>نسيت كلمة السر !</h4>
+                                <h4 className='welcome-msg'>نسيت كلمة السر !</h4>
                                 <input
                                     type="text"
                                     placeholder="البريد الالكتروني"
@@ -137,7 +137,7 @@ export default function ForgetPassword() {
                                 {/* نهاية رسالة الخطأ بالإدخال للمُدخل المحدد */}
                                 {/* في حالة لم يكن لدينا حالة التحقق في الانتظار ولا يوجد أي خطأ نظهر المكون التالي */}
                                 {!isWaitCheckStatus && !errMsg && <button type='submit' className='btn forget-password-btn w-100 p-3'>إرسال</button>}
-                                <p className='mt-4 mb-0 note'>تنويه: في حال لم يكن لديك إيميل يرجى التواصل على رقم الواتس
+                                <p className='mt-4 mb-0 note text-danger'>تنويه: في حال لم يكن لديك إيميل يرجى التواصل على رقم الواتس
                                     09444444444444444444
                                 </p>
                                 {/* في حالة كان لدينا حالة التحقق في الانتظار ولا يوجد أي خطأ نظهر المكون التالي */}
@@ -155,7 +155,7 @@ export default function ForgetPassword() {
                         </div>
                         {/* نهاية مكون العمود */}
                         {/* بداية مكون العمود */}
-                        <div className="col-lg-6">
+                        <div className="col-lg-6 text-center">
                             <img src={ForgetPasswordImage.src} alt="Forget Password Image !!" className='forget-password-img' />
                         </div>
                         {/* نهاية مكون العمود */}
