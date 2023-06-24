@@ -29,6 +29,12 @@
   color: #FFF;
 }
 
+@media (max-width: 767px) {
+  .sign-up .page-content .container .sign-up-form .sign-up-btn, .sign-up .page-content .container .sign-up-form .wait-sign-up-btn {
+    width: 75% !important;
+  }
+}
+
 .sign-up .popup-box {
   position: fixed;
   top: 0;

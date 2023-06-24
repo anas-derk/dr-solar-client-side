@@ -19,6 +19,9 @@
                     font-family: var(--font-family-two);
                     font-size: 19px;
                     color: #FFF;
+                    @media (max-width: 767px) {
+                        width: 75% !important;
+                    }
                 }
             }
         }

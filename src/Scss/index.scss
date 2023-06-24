@@ -58,6 +58,9 @@ input, select, textarea{
 
 .shared-pages-with-styles{
     .page-content{
+        @media (max-width: 767px) {
+            padding: 0.5rem !important;
+        }
         .container{
             min-height: inherit;
             font-family: var(--font-family-two);
