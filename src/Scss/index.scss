@@ -2,12 +2,12 @@
     font-family: 'Tajawal', sans-serif;
 }
 :root{
-    --main-color-one: rgba(236, 188,115, 100%);
+    --main-color-one: rgba(107, 144,128, 100%);
     --main-color-two: rgba(112, 112, 112, 100%);
-    --main-color-three: rgba(248, 212,121, 100%);
-    --main-color-four: #78e3c8;
-    --main-color-five: rgba(216, 169, 139, 100%);
-    --main-color-six: rgba(248, 212,121, 32%);
+    --main-color-three: rgba(183, 228,199, 100%);
+    --main-color-four: rgba(183, 228, 199, 50%);
+    --main-color-five: rgba(64, 145, 108, 100%);
+    --main-color-six: rgba(183, 228,199, 100%);
 }
 
 ul{
@@ -34,7 +34,7 @@ a{
 }
 
 ::-webkit-scrollbar-thumb{
-    background-color: var(--main-color-two);
+    background-color: #000;
 }
 
 input, select, textarea{
@@ -62,7 +62,7 @@ input, select, textarea{
             min-height: inherit;
             .row{
                 > div:first-child{
-                    background-color: var(--main-color-six);
+                    background-color: var(--main-color-five);
                     border-radius: 30px;
                 }
                 min-height: inherit;
@@ -86,6 +86,7 @@ input, select, textarea{
                     margin-bottom: 0;
                     height: 400px;
                     overflow-y: auto;
+                    color: #FFF;
                     @media (max-width: 767px) {
                         text-align: center;
                         font-size: 18px;

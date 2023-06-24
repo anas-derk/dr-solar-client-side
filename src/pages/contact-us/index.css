@@ -7,6 +7,7 @@
   line-height: 2;
   font-size: 20px;
   margin-bottom: 0;
+  color: #FFF;
 }
 
 @media (max-width: 767px) {
@@ -18,7 +19,7 @@
 }
 
 .contact-us .contact-us-content-box .how-to-contact-us-explain .email-link {
-  color: #000;
+  color: #FFF;
 }
 
 .contact-us .contact-us-content-box .how-to-contact-us-explain .email-link:hover {

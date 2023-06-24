@@ -16,5 +16,5 @@
 
 .profile .page-content .container .edit-profile-form .edit-profile-btn {
   background-color: var(--main-color-one);
-  border: 1px solid #000;
+  color: #FFF;
 }

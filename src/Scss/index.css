@@ -3,12 +3,12 @@
 }
 
 :root {
-  --main-color-one: #ecbc73;
+  --main-color-one: #6b9080;
   --main-color-two: #707070;
-  --main-color-three: #f8d479;
-  --main-color-four: #78e3c8;
-  --main-color-five: #d8a98b;
-  --main-color-six: #f8d479;
+  --main-color-three: #b7e4c7;
+  --main-color-four: #b7e4c7;
+  --main-color-five: #40916c;
+  --main-color-six: #b7e4c7;
 }
 
 ul {
@@ -36,7 +36,7 @@ a {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: var(--main-color-two);
+  background-color: #000;
 }
 
 input, select, textarea {
@@ -69,7 +69,7 @@ input, select, textarea {
 }
 
 .shared-pages-with-styles .page-content .container .row > div:first-child {
-  background-color: var(--main-color-six);
+  background-color: var(--main-color-five);
   border-radius: 30px;
 }
 
@@ -95,6 +95,7 @@ input, select, textarea {
   margin-bottom: 0;
   height: 400px;
   overflow-y: auto;
+  color: #FFF;
 }
 
 @media (max-width: 767px) {

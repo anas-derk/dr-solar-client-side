@@ -3,17 +3,17 @@
         height: 400px;
         overflow-y: auto;
         .how-to-contact-us-explain{
-            // text-align: justify;
             line-height: 2;
             font-size: 20px;
             margin-bottom: 0;
+            color: #FFF;
             @media (max-width: 767px) {
                 text-align: center;
                 font-size: 18px;
                 padding: 0 2rem !important;
             }
             .email-link{
-                color: #000;
+                color: #FFF;
                 &:hover{
                     font-weight: bold;
                 }

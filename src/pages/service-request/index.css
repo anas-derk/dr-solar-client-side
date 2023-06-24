@@ -29,5 +29,5 @@
 
 .service-request .page-content .container .service-request-form .service-request-btn, .service-request .page-content .container .service-request-form .wait-requesting-btn {
   background-color: var(--main-color-one);
-  border: 1px solid #000;
+  color: #FFF;
 }
