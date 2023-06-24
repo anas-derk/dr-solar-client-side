@@ -29,7 +29,7 @@
 }
 
 .home .page-content .introduction .carousel .slider-control-icon {
-  color: var(--main-color-one);
+  color: var(--main-color-three);
   font-size: 35px;
 }
 
@@ -76,28 +76,7 @@
   line-height: 2;
   margin-bottom: 20px;
   font-size: 25px;
-}
-
-@media (max-width: 767px) {
-  .home .page-content .introduction .carousel .carousel-inner .carousel-item .carousel-caption .container .row .slider-content-explain p:first-child.exeption-paragraph-3 {
-    line-height: 2.4;
-  }
-}
-
-@media (min-width: 521px) and (max-width: 767px) {
-  .home .page-content .introduction .carousel .carousel-inner .carousel-item .carousel-caption .container .row .slider-content-explain p.exeption-paragraph {
-    line-height: 2.5 !important;
-  }
-}
-
-.home .page-content .introduction .carousel .carousel-inner .carousel-item .carousel-caption .container .row .slider-content-explain p:last-child {
-  margin-bottom: 0;
-}
-
-@media (max-width: 767px) {
-  .home .page-content .introduction .carousel .carousel-inner .carousel-item .carousel-caption .container .row .slider-content-explain p:last-child.exeption-paragraph {
-    line-height: 2;
-  }
+  line-height: 1.5;
 }
 
 @media (max-width: 767px) {

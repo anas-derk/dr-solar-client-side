@@ -4,15 +4,14 @@
         overflow-y: auto;
         .how-to-contact-us-explain{
             line-height: 2;
-            font-size: 20px;
             margin-bottom: 0;
             font-family: var(--font-family-one);
-            font-size: 22;
+            font-size: 22px;
             color: #004F59;
             @media (max-width: 767px) {
                 text-align: center;
-                font-size: 18px;
-                padding: 0 2rem !important;
+                font-size: 20px;
+                padding: 0 1rem !important;
             }
             .email-link{
                 color: #FFF;

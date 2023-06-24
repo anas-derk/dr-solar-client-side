@@ -23,7 +23,7 @@
                 background-color: var(--main-color-five);
                 position: relative;
                 .slider-control-icon{
-                    color: var(--main-color-one);
+                    color: var(--main-color-three);
                     font-size: 35px;
                 }
                 .carousel-inner{
@@ -55,26 +55,7 @@
                                             line-height: 2;
                                             margin-bottom: 20px;
                                             font-size: 25px;
-                                            &:first-child {
-                                                @media (max-width: 767px) {
-                                                    &.exeption-paragraph-3{
-                                                        line-height: 2.4;
-                                                    }
-                                                }
-                                            }
-                                            @media (min-width: 521px) and (max-width: 767px) {
-                                                &.exeption-paragraph{
-                                                    line-height: 2.5 !important;
-                                                }
-                                            }
-                                            &:last-child {
-                                                margin-bottom: 0;
-                                                @media (max-width: 767px) {
-                                                    &.exeption-paragraph{
-                                                        line-height: 2;
-                                                    }
-                                                }
-                                            }
+                                            line-height: 1.5;
                                         }
                                         font-size: 19px;
                                         @media (max-width: 767px) {
