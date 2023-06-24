@@ -31,7 +31,7 @@ export default function ServiceRequest() {
     // تعريف كائن يحتوي وصف الملفات بحيث نعرض تفاصيل عنها بحسب نوع الخدمة التي يحددها المستخدم لاحقاً
     const filesCaption = {
         "طلب فحص": ["صورة الألواح الشمسية مع صورة اللصاقة الخلفية", "صورة الانفرتر مع صورة اللصاقة التي عليه"],
-        "طلب تنظيف": ["صورة الألواح الشمسية مع صورة اللصاقة الخلفية", "صورة الانفرتر مع صورة اللصاقة التي عليه"],
+        "طلب تنظيف": ["صورة الألواح الشمسية"],
     }
     // تعريف راوتر لاستخدامه في التعامل مع روابط الصفحات
     const router = useRouter();
@@ -117,7 +117,8 @@ export default function ServiceRequest() {
                             msg: "عذراً ، يجب أن يكون الملف أو الملفات صور من امتداد png أو jpg !!"
                         },
                     },
-                }, 
+                },
+                serviceType !== "طلب تنظيف" ?
                 {
                     name: "fileList2",
                     value: fileList2,
@@ -128,6 +129,12 @@ export default function ServiceRequest() {
                         isImages: {
                             msg: "عذراً ، يجب أن يكون الملف أو الملفات صور من امتداد png أو jpg !!"
                         },
+                    },
+                } : {
+                    name: "fileList2",
+                    value: fileList2,
+                    rules: {
+                        isRequired: undefined,
                     },
                 },
                 {
@@ -303,7 +310,7 @@ export default function ServiceRequest() {
                                 {/* بداية مكون العمود */}
                                 <div className="col-md-6">
                                     <textarea
-                                        placeholder="العنوان بشكل دقيق مع ذكر الطابق ، مثال: محافظة دمشق، الميدان ، امتداد شارع المول, بناء الغاردينيا، مقابل محل الملكي ، الطابق الرابع "
+                                        placeholder="شرح مبسط في حال كنت تواجه مشكلة أو شرح مبسط عن الطلب المرغوب ، وكذلك يمكن إضافة العنوان بالتفصيل في حالة إختلافه عن العنوان المسجل"
                                         // في حالة يوجد خطأ بالإدخال نجعل الحواف بلون أحمر
                                         className={`form-control p-3 explain-and-new-address ${errors["address"] ? "border border-danger mb-2" : "mb-4"}`}
                                         onChange={(e) => setAddress(e.target.value)}

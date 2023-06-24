@@ -57,16 +57,16 @@ const RequestsManager = ({ result }) => {
                                             <td className="p-3">{getDateFormated(request.requestPostDate)}</td>
                                         </tr>
                                         <tr>
-                                            <td className="fw-bold p-3">نوع الطلب</td>
-                                            <td className="p-3">{request.requestType}</td>
-                                        </tr>
-                                        <tr>
                                             <td className="fw-bold p-3">نوع الخدمة</td>
                                             <td className="p-3">{request.serviceType}</td>
                                         </tr>
                                         <tr>
-                                            <td className="fw-bold p-3">شرح الطلب  / العنوان الجديد</td>
-                                            <td className="p-3">{request.explainAndNewAddress}</td>
+                                            <td className="fw-bold p-3">نوع الاشتراك</td>
+                                            <td className="p-3">{request.subType}</td>
+                                        </tr>
+                                        <tr>
+                                            <td className="fw-bold p-3">العنوان</td>
+                                            <td className="p-3">{request.address}</td>
                                         </tr>
                                         <tr>
                                             <td className="fw-bold p-3">تواريخ الأيام المفضلة</td>
@@ -81,8 +81,8 @@ const RequestsManager = ({ result }) => {
                                             <td className="p-3">{request.electricityTimes}</td>
                                         </tr>
                                         <tr>
-                                            <td className="fw-bold p-3">هل يوجد طاقة بديلة ؟</td>
-                                            <td className="p-3">{request.isAlternativeEnergyExist}</td>
+                                            <td className="fw-bold p-3">هل يرغب بتجديد الاشتراك ؟</td>
+                                            <td className="p-3">{request.isWishRenewSubscription}</td>
                                         </tr>
                                         <tr>
                                             <td className="fw-bold">الصور</td>
