@@ -37,13 +37,13 @@ const RequestsManager = ({ result }) => {
         // Start Requests Manager Page
         <div className="requests-manager">
             <Head>
-                <title>مستر فيكس - إدارة الطلبات</title>
+                <title>دكتور سولار - إدارة الطلبات</title>
             </Head>
             {/* Start Content Section */}
             <section className="content text-center pt-5 pb-5">
                 {/* Start Container Component From Bootstrap */}
                 <div className="container">
-                    <h1 className="welcome-msg mb-4">مرحباً بك في صفحة إدارة الطلبات الخاصة بك في مستر فيكس</h1>
+                    <h1 className="welcome-msg mb-4">مرحباً بك في صفحة إدارة الطلبات الخاصة بك في دكتور سولار</h1>
                     <hr />
                     {result.length > 0 ? result.map((request, index) =>
                         <>
@@ -65,7 +65,7 @@ const RequestsManager = ({ result }) => {
                                             <td className="p-3">{request.subType}</td>
                                         </tr>
                                         <tr>
-                                            <td className="fw-bold p-3">العنوان</td>
+                                            <td className="fw-bold p-3">الشرح / العنوان الجديد</td>
                                             <td className="p-3">{request.address}</td>
                                         </tr>
                                         <tr>

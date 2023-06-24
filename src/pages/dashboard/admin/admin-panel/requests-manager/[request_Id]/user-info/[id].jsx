@@ -25,7 +25,7 @@ const RequestSenderInfo = ({ result }) => {
         // Start Request Sender Info Page
         <div className="request-sender-info">
             <Head>
-                <title>مستر فيكس - معلومات الشخص الذي أرسل الطلب </title>
+                <title>دكتور سولار - معلومات الشخص الذي أرسل الطلب</title>
             </Head>
             {/* Start Content Section */}
             <section className="content text-center pt-5 pb-5">

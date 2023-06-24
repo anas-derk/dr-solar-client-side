@@ -33,13 +33,13 @@ export default function DeleteAds({ result }) {
         // Start Delete And Edit Ads Page
         <div className="delete-and-edit-ads">
             <Head>
-                <title>مستر فيكس - حذف الإعلانات</title>
+                <title>دكتور سولار - حذف الإعلانات</title>
             </Head>
             {/* Start Content Section */}
             <section className="content text-center pt-5 pb-5">
                 {/* Start Container Component From Bootstrap */}
                 <div className="container">
-                    <h1 className="welcome-msg mb-4">مرحباً بك في صفحة حذف الإعلانات الخاصة بك في مستر فيكس</h1>
+                    <h1 className="welcome-msg mb-4">مرحباً بك في صفحة حذف الإعلانات الخاصة بك في دكتور سولار</h1>
                     <hr />
                     {result.length ? (
                         <table className="ads-list-table">

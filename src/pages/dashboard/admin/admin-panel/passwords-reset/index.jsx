@@ -57,12 +57,12 @@ const PasswordsReset = () => {
         // Start Passwords Reset Page
         <div className="passwords-reset">
             <Head>
-                <title>مستر فيكس - إعادة تعيين كلمات المرور</title>
+                <title>دكتور سولار - إعادة تعيين كلمات المرور</title>
             </Head>
             {/* Start Content Section */}
             <section className="content d-flex justify-content-center align-items-center flex-column text-center">
                 <div className="container">
-                    <h1 className="welcome-msg mb-4">مرحباً بك في صفحة إعادة تعيين كلمات السر الخاصة بالمستخدمين في مستر فيكس</h1>
+                    <h1 className="welcome-msg mb-4">مرحباً بك في صفحة إعادة تعيين كلمات السر الخاصة بالمستخدمين في دكتور سولار</h1>
                     <form className="reset-password-form w-100" onSubmit={resetPassword}>
                         <input
                             type="number"

@@ -33,7 +33,7 @@ const AdminLogin = () => {
     return (
         <div className="admin-login text-center p-5">
             <Head>
-                <title>مستر فيكس - تسجيل دخول المسؤول</title>
+                <title>دكتور سولار - تسجيل دخول المسؤول</title>
             </Head>
             <h1>مرحباً بك في صفحة تسجيل الدخول الخاصة بالمسؤول</h1>
             <hr className="mb-5" />

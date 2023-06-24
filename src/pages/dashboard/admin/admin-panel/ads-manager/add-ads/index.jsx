@@ -61,12 +61,12 @@ export default function AddAds() {
         // Start Add Ads Page
         <div className="add-ads">
             <Head>
-                <title>مستر فيكس - إضافة إعلان</title>
+                <title>دكتور سولار - إضافة إعلان</title>
             </Head>
             {/* Start Content Section */}
             <section className="content d-flex justify-content-center align-items-center flex-column text-center">
                 <div className="container">
-                    <h1 className="welcome-msg mb-4">مرحباً بك في صفحة إضافة إعلان الخاصة بالمستخدمين في مستر فيكس</h1>
+                    <h1 className="welcome-msg mb-4">مرحباً بك في صفحة إضافة إعلان الخاصة بالمستخدمين في دكتور سولار</h1>
                     <form className="add-ads-form w-100" onSubmit={addAds}>
                         <input
                             type="text"
