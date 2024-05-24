@@ -1,88 +1,115 @@
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import Axios from "axios";
+import axios from "axios";
+import { getAdminInfo } from "../../../../../../../public/global_functions/popular";
+import LoaderPage from "@/components/LoaderPage";
+import ErrorOnLoadingThePage from "@/components/ErrorOnLoadingThePage";
 
 export default function AddAds() {
-    const router = useRouter();
-    const [adsContent, setAdsContent] = useState("");
+    const [isLoadingPage, setIsLoadingPage] = useState(true);
+    const [isErrorMsgOnLoadingThePage, setIsErrorMsgOnLoadingThePage] = useState(false);
+    const [adContent, setAdContent] = useState("");
     const [errorMsg, setErrorMsg] = useState("");
     const [successMsg, setSuccessMsg] = useState("");
     const [waitMsg, setWaitMsg] = useState("");
-    const addAds = async (e) => {
-        e.preventDefault();
-        setWaitMsg("الرجاء الانتظار ...");
-        try {
-            let res = await Axios.post(`${process.env.BASE_API_URL}/admin/ads/add-ads`,
-                { content: adsContent }
-            );
-            let result = await res.data;
-            setTimeout(() => {
-                setWaitMsg("");
-                console.log(result)
-                if (result === "عذراً يوجد إعلان سابق بنفس المحتوى تماماً") {
-                    console.log(result);
-                    setErrorMsg(result);
-                    setTimeout(() => {
-                        setErrorMsg("");
-                        setAdsContent("");
-                    }, 1500);
-                } else if (result === "تهانينا ، لقد تمّ إضافة الإعلان بنجاح") {
-                    console.log(result)
-                    setSuccessMsg(result);
-                    setTimeout(() => {
-                        setSuccessMsg("");
-                        setAdsContent("");
-                    }, 1500);
-                }
-            }, 1500);
-        }
-        catch (err) {
-            console.log(err);
-        }
-    }
+    const router = useRouter();
     useEffect(() => {
-        let adminId = localStorage.getItem("mr-fix-admin-id");
-        if (!adminId) {
-            router.push("/dashboard/admin/login");
-        } else {
-            Axios.get(`${process.env.BASE_API_URL}/admin/admin-info/${adminId}`)
-                .then((res) => {
-                    let result = res.data;
-                    if (result === "عذراً ، حساب المسؤول غير موجود") {
-                        localStorage.removeItem("mr-fix-admin-id");
-                        router.push("/dashboard/admin/login");
+        const adminToken = localStorage.getItem(process.env.adminTokenNameInLocalStorage);
+        if (adminToken) {
+            getAdminInfo()
+                .then(async (result) => {
+                    if (result.error) {
+                        localStorage.removeItem(process.env.adminTokenNameInLocalStorage);
+                        await router.replace("/dashboard/admin/login");
+                    } else {
+                        setIsLoadingPage(false);
                     }
                 })
-                .catch((err) => console.log(err));
-        }
+                .catch(async (err) => {
+                    if (err?.response?.data?.msg === "Unauthorized Error") {
+                        localStorage.removeItem(process.env.adminTokenNameInLocalStorage);
+                        await router.replace("/dashboard/admin/login");
+                    }
+                    else {
+                        setIsLoadingPage(false);
+                        setIsErrorMsgOnLoadingThePage(true);
+                    }
+                });
+        } else router.push("/dashboard/admin/login");
     }, []);
+    const addAd = async (e) => {
+        try {
+            e.preventDefault();
+            setWaitMsg("الرجاء الانتظار ...");
+            const res = await axios.post(`${process.env.BASE_API_URL}/ads/add-new-ad`, { content: adContent }, {
+                headers: {
+                    Authorization: localStorage.getItem(process.env.adminTokenNameInLocalStorage)
+                }
+            }
+            );
+            const result = res.data;
+            setWaitMsg("");
+            if (result.error) {
+                setErrorMsg(result.msg);
+                setTimeout(() => {
+                    setErrorMsg("");
+                    setAdContent("");
+                }, 1500);
+            } else {
+                setSuccessMsg(result.msg);
+                setTimeout(() => {
+                    setSuccessMsg("");
+                    setAdContent("");
+                }, 1500);
+            }
+        }
+        catch (err) {
+            if (err?.response?.data?.msg === "Unauthorized Error") {
+                localStorage.removeItem(process.env.adminTokenNameInLocalStorage);
+                await router.replace("/dashboard/admin/login");
+                return;
+            }
+            // طباعة رسالة الخطأ في الكونسول إن حصلت مشكلة عند إرسال الطلب للسيرفر
+            setWaitMsg("");
+            setErrorMsg("عذراً حدث خطا ما ، يرجى إعادة المحاولة !!");
+            let errorTimeout = setTimeout(() => {
+                setErrorMsg("");
+                clearTimeout(errorTimeout);
+            }, 5000);
+        }
+    }
     return (
         // Start Add Ads Page
         <div className="add-ads">
             <Head>
                 <title>دكتور سولار - إضافة إعلان</title>
             </Head>
-            {/* Start Content Section */}
-            <section className="content d-flex justify-content-center align-items-center flex-column text-center">
-                <div className="container">
-                    <h1 className="welcome-msg mb-4">مرحباً بك في صفحة إضافة إعلان الخاصة بالمستخدمين في دكتور سولار</h1>
-                    <form className="add-ads-form w-100" onSubmit={addAds}>
-                        <input
-                            type="text"
-                            placeholder="الرجاء إدخال نص الإعلان"
-                            required
-                            className="form-control mb-4 p-3"
-                            onChange={(e) => setAdsContent(e.target.value.trim())}
-                        />
-                        {!errorMsg && !successMsg && !waitMsg && <button type="submit" className="btn btn-danger p-3">إضافة إعلان</button>}
-                        {waitMsg && <button type="submit" className="btn btn-warning p-3 d-block w-100 mx-auto" disabled>{waitMsg}</button>}
-                        {errorMsg && <button type="submit" className="btn btn-danger p-3 d-block w-100 mx-auto" disabled>{errorMsg}</button>}
-                        {successMsg && <button type="submit" className="btn btn-success p-3 d-block w-100 mx-auto" disabled>{successMsg}</button>}
-                    </form>
-                </div>
-            </section>
-            {/* End Content Section */}
+            {!isLoadingPage && !isErrorMsgOnLoadingThePage && <>
+                {/* Start Content Section */}
+                <section className="content d-flex justify-content-center align-items-center flex-column text-center">
+                    <div className="container">
+                        <h1 className="welcome-msg mb-4">مرحباً بك في صفحة إضافة إعلان الخاصة بالمستخدمين في دكتور سولار</h1>
+                        <form className="add-ads-form w-100" onSubmit={addAd}>
+                            <input
+                                type="text"
+                                placeholder="الرجاء إدخال نص الإعلان"
+                                required
+                                className="form-control mb-4 p-3"
+                                onChange={(e) => setAdsContent(e.target.value.trim())}
+                                value={adContent}
+                            />
+                            {!errorMsg && !successMsg && !waitMsg && <button type="submit" className="btn btn-danger p-3">إضافة إعلان</button>}
+                            {waitMsg && <button type="submit" className="btn btn-warning p-3 d-block w-100 mx-auto" disabled>{waitMsg}</button>}
+                            {errorMsg && <button type="submit" className="btn btn-danger p-3 d-block w-100 mx-auto" disabled>{errorMsg}</button>}
+                            {successMsg && <button type="submit" className="btn btn-success p-3 d-block w-100 mx-auto" disabled>{successMsg}</button>}
+                        </form>
+                    </div>
+                </section>
+                {/* End Content Section */}
+            </>}
+            {isLoadingPage && !isErrorMsgOnLoadingThePage && <LoaderPage />}
+            {isErrorMsgOnLoadingThePage && <ErrorOnLoadingThePage />}
         </div>
         // End Add Ads Page
     );
