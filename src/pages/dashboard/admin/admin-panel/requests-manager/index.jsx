@@ -3,24 +3,49 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 import Axios from "axios";
 import Link from "next/link";
+import { getAdminInfo, getAllRequestsInsideThePage, getRequestsCount } from "../../../../../../public/global_functions/popular";
 
 const RequestsManager = ({ result }) => {
+    const [isLoadingPage, setIsLoadingPage] = useState(true);
+    const [isErrorMsgOnLoadingThePage, setIsErrorMsgOnLoadingThePage] = useState(false);
+    const [allRequestsInsideThePage, setAllRequestsInsideThePage] = useState([]);
+    const [isGetRequests, setIsGetRequests] = useState(true);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPagesCount, setTotalPagesCount] = useState(0);
+    const [errorMsg, setErrorMsg] = useState("");
+    const [successMsg, setSuccessMsg] = useState("");
+    const [waitMsg, setWaitMsg] = useState("");
+    const pageSize = 5;
     const router = useRouter();
     useEffect(() => {
-        let adminId = localStorage.getItem("mr-fix-admin-id");
-        if (!adminId) {
-            router.push("/dashboard/admin/login");
-        } else {
-            Axios.get(`${process.env.BASE_API_URL}/admin/admin-info/${adminId}`)
-                .then((res) => {
-                    let result = res.data;
-                    if (result === "عذراً ، حساب المسؤول غير موجود") {
-                        localStorage.removeItem("mr-fix-admin-id");
-                        router.push("/dashboard/admin/login");
+        const adminToken = localStorage.getItem(process.env.adminTokenNameInLocalStorage);
+        if (adminToken) {
+            getAdminInfo()
+                .then(async (result) => {
+                    if (result.error) {
+                        localStorage.removeItem(process.env.adminTokenNameInLocalStorage);
+                        await router.replace("/dashboard/admin/login");
+                    } else {
+                        result = await getRequestsCount();
+                        if (result.data > 0) {
+                            setAllRequestsInsideThePage((await getAllRequestsInsideThePage(1, pageSize)).data);
+                            setTotalPagesCount(Math.ceil(result.data / pageSize));
+                        }
+                        setIsGetRequests(false);
+                        setIsLoadingPage(false);
                     }
                 })
-                .catch((err) => console.log(err));
-        }
+                .catch(async (err) => {
+                    if (err?.response?.data?.msg === "Unauthorized Error") {
+                        localStorage.removeItem(process.env.adminTokenNameInLocalStorage);
+                        await router.replace("/dashboard/admin/login");
+                    }
+                    else {
+                        setIsLoadingPage(false);
+                        setIsErrorMsgOnLoadingThePage(true);
+                    }
+                });
+        } else router.push("/dashboard/admin/login");
     }, []);
     const getDateFormated = (requestPostDate) => {
         let requestPostInDateFormat = new Date(requestPostDate);
@@ -30,8 +55,7 @@ const RequestsManager = ({ result }) => {
         const hours = requestPostInDateFormat.getHours();
         const minutes = requestPostInDateFormat.getMinutes();
         const seconds = requestPostInDateFormat.getSeconds();
-        requestPostInDateFormat = `التاريخ: (${day}-${month}-${year}) - الوقت: (${hours}:${minutes}:${seconds})`;
-        return requestPostInDateFormat;
+        return  `التاريخ: (${day}-${month}-${year}) - الوقت: (${hours}:${minutes}:${seconds})`;
     }
     return (
         // Start Requests Manager Page
