@@ -130,4 +130,4 @@ function inputValuesValidation(inputs) {
 }
 
 // تصدير الدوال المطلوبة
-export default { isEmail, inputValuesValidation };
+export { isEmail, inputValuesValidation };

@@ -6,13 +6,18 @@ import { FiUserPlus } from "react-icons/fi";
 import { RiFileUploadLine } from "react-icons/ri";
 import Axios from "axios";
 import { useRouter } from 'next/router';
-import global_functions from "../../../public/global_functions/validations";
+import global_functions, { inputValuesValidation } from "../../../public/global_functions/validations";
 import { AiOutlineClockCircle } from "react-icons/ai";
 import RequestServiceImage from "../../../public/images/RequestService/request-service.png";
+import { getUserInfo } from '../../../public/global_functions/popular';
+import LoaderPage from '@/components/LoaderPage';
+import ErrorOnLoadingThePage from '@/components/ErrorOnLoadingThePage';
 
 // تعريف دالة صفحة طلب خدمة 
 export default function ServiceRequest() {
     // تعريف المتغيرات المطلوب كــ state
+    const [isLoadingPage, setIsLoadingPage] = useState(true);
+    const [isErrorMsgOnLoadingThePage, setIsErrorMsgOnLoadingThePage] = useState(false);
     const [serviceType, setServiceType] = useState("");
     const [subType, setSubtype] = useState("");
     const [address, setAddress] = useState("");
@@ -23,8 +28,6 @@ export default function ServiceRequest() {
     const [electricityTimes, setElectricityTimes] = useState("");
     const [isWishRenewSubscription, setisWishRenewSubscription] = useState("");
     const [userId, setUserId] = useState("");
-    const [userData, setUserData] = useState("");
-    const [errorInFetchUserDataMsg, setErrorInFetchUserDataMsg] = useState("");
     const [errors, setErrors] = useState({});
     const [isRequestingStatus, setIsRequestingStatus] = useState(false);
     const [isSuccessfulyStatus, setIsSuccessfulyStatus] = useState(false);
@@ -38,91 +41,80 @@ export default function ServiceRequest() {
     const router = useRouter();
     // تعريف دالة useEffect من أجل عمل شيء ما عند تحميل الصفحة في جانب العميل أي المتصفح
     useEffect(() => {
-        // جلب بعض العناصر من صفحة الويب باستخدام الجافا سكربت
-        const header = document.querySelector("#__next .page-header"),
-            pageContent = document.querySelector(".service-request .page-content");
-        // جعل أقل ارتفاع لعنصر pageContent هو عرض الصفحة المرأية كاملةً منقوصاً منها ارتفاع عنصر رأس الصفحة
-        pageContent.style.minHeight = `calc(100vh - ${header.clientHeight}px)`;
-        // جلب رقم معرّف المستخدم من التخزين المحلي
-        const id = localStorage.getItem("mr-fix-user-id");
-        // تخزينه في متغير معرف المستخدم كــ state
-        setUserId(id);
-        // التحقق من أنّ الرقم غير موجود
-        if (!id) {
-            // في حالة الرقم غير موجود نعيد التوجيه إلى صفحة تسجيل الدخول
-            router.push("/login");
-        } else {
-            // في حالة الرقم موجود نتأكد من أنّ هذا الرقم موجود فعلاً في قاعدة البيانات عن طريق جلب بيانات المستخدم ذو المعرّف السابق
-            async function fetchData(userId) {
-                try {
-                    let res = await Axios.get(`${process.env.BASE_API_URL}/users/user-info/${userId}`);
-                    let result = await res.data;
-                    if (result === "عذراً ، المستخدم غير موجود") {
-                        localStorage.clear();
-                        router.push("/login");
+        if (!isLoadingPage && !isErrorMsgOnLoadingThePage) {
+            // جلب بعض العناصر من صفحة الويب باستخدام الجافا سكربت
+            const header = document.querySelector("#__next .page-header"),
+                pageContent = document.querySelector(".service-request .page-content");
+            // جعل أقل ارتفاع لعنصر pageContent هو عرض الصفحة المرأية كاملةً منقوصاً منها ارتفاع عنصر رأس الصفحة
+            pageContent.style.minHeight = `calc(100vh - ${header.clientHeight}px)`;
+        }
+    }, [isLoadingPage]);
+    useEffect(() => {
+        const userToken = localStorage.getItem(process.env.userTokenNameInLocalStorage);
+        if (userToken) {
+            getUserInfo()
+                .then(async (result) => {
+                    console.log(result);
+                    if (!result.error) {
+                        setIsLoadingPage(false);
                     } else {
-                        setUserData(result);
+                        localStorage.removeItem(process.env.userTokenNameInLocalStorage);
+                        await router.replace("/login");
                     }
-                }
-                catch (err) {
-                    setErrorInFetchUserDataMsg("عذراً حدث خطأ ، الرجاء إعادة المحاولة");
-                }
-            }
-            fetchData(id);
+                })
+                .catch(async (err) => {
+                    if (err?.response?.data?.msg === "Unauthorized Error") {
+                        localStorage.removeItem(process.env.userTokenNameInLocalStorage);
+                        await router.replace("/login");
+                    } else {
+                        setIsLoadingPage(false);
+                        setIsErrorMsgOnLoadingThePage(true);
+                    }
+                });
+        } else {
+            router.replace("/login");
         }
     }, []);
     // تعريف دالة إرسال طلب لطلب خدمة للباك ايند
     const serviceRequest = async (e) => {
-        // منع إرسال المعلومات لنفس الصفحة
-        e.preventDefault();
-        // إعادة تعيين كائن الأخطاء الخاصة بالمدخلات إلى كائن فارغ لتصفير كل الأخطاء وإعادة التحقق من كل الأخطاء للمدخلات الجديدة
-        setErrors({});
-        // إرسال المدخلات إلى دالة inputValuesValidation للتحقق منها قبل إرسال الطلب إلى الباك ايند وتخزينها في المتغير errorsObject
-        const errorsObject = global_functions.inputValuesValidation(
-            [
-                {
-                    name: "serviceType",
-                    value: serviceType,
-                    rules: {
-                        isRequired: {
-                            msg: "عذراً ، لا يجب أن يكون الحقل فارغاً !!",
-                        },
-                    },
-                },
-                {
-                    name: "subType",
-                    value: subType,
-                    rules: {
-                        isRequired: {
-                            msg: "عذراً ، لا يجب أن يكون الحقل فارغاً !!",
-                        },
-                    },
-                },
-                {
-                    name: "address",
-                    value: address,
-                    rules: {
-                        isRequired: {
-                            msg: "عذراً ، لا يجب أن يكون الحقل فارغاً !!",
-                        },
-                    },
-                },
-                {
-                    name: "fileList1",
-                    value: fileList1,
-                    rules: {
-                        isRequired: {
-                            msg: "عذراً ، لا يجب أن يكون الحقل فارغاً !!",
-                        },
-                        isImages: {
-                            msg: "عذراً ، يجب أن يكون الملف أو الملفات صور من امتداد png أو jpg !!"
-                        },
-                    },
-                },
-                serviceType !== "طلب تنظيف" ?
+        try {
+            // منع إرسال المعلومات لنفس الصفحة
+            e.preventDefault();
+            // إعادة تعيين كائن الأخطاء الخاصة بالمدخلات إلى كائن فارغ لتصفير كل الأخطاء وإعادة التحقق من كل الأخطاء للمدخلات الجديدة
+            setErrors({});
+            // إرسال المدخلات إلى دالة inputValuesValidation للتحقق منها قبل إرسال الطلب إلى الباك ايند وتخزينها في المتغير errorsObject
+            const errorsObject = inputValuesValidation(
+                [
                     {
-                        name: "fileList2",
-                        value: fileList2,
+                        name: "serviceType",
+                        value: serviceType,
+                        rules: {
+                            isRequired: {
+                                msg: "عذراً ، لا يجب أن يكون الحقل فارغاً !!",
+                            },
+                        },
+                    },
+                    {
+                        name: "subType",
+                        value: subType,
+                        rules: {
+                            isRequired: {
+                                msg: "عذراً ، لا يجب أن يكون الحقل فارغاً !!",
+                            },
+                        },
+                    },
+                    {
+                        name: "address",
+                        value: address,
+                        rules: {
+                            isRequired: {
+                                msg: "عذراً ، لا يجب أن يكون الحقل فارغاً !!",
+                            },
+                        },
+                    },
+                    {
+                        name: "fileList1",
+                        value: fileList1,
                         rules: {
                             isRequired: {
                                 msg: "عذراً ، لا يجب أن يكون الحقل فارغاً !!",
@@ -131,120 +123,128 @@ export default function ServiceRequest() {
                                 msg: "عذراً ، يجب أن يكون الملف أو الملفات صور من امتداد png أو jpg !!"
                             },
                         },
-                    } : {
-                        name: "fileList2",
-                        value: fileList2,
+                    },
+                    serviceType !== "طلب تنظيف" ?
+                        {
+                            name: "fileList2",
+                            value: fileList2,
+                            rules: {
+                                isRequired: {
+                                    msg: "عذراً ، لا يجب أن يكون الحقل فارغاً !!",
+                                },
+                                isImages: {
+                                    msg: "عذراً ، يجب أن يكون الملف أو الملفات صور من امتداد png أو jpg !!"
+                                },
+                            },
+                        } : {
+                            name: "fileList2",
+                            value: fileList2,
+                            rules: {
+                                isRequired: undefined,
+                            },
+                        },
+                    {
+                        name: "preferredDateOfVisit",
+                        value: preferredDateOfVisit,
                         rules: {
-                            isRequired: undefined,
+                            isRequired: {
+                                msg: "عذراً ، لا يجب أن يكون الحقل فارغاً !!",
+                            },
                         },
                     },
-                {
-                    name: "preferredDateOfVisit",
-                    value: preferredDateOfVisit,
-                    rules: {
-                        isRequired: {
-                            msg: "عذراً ، لا يجب أن يكون الحقل فارغاً !!",
+                    {
+                        name: "preferredTimeOfVisit",
+                        value: preferredTimeOfVisit,
+                        rules: {
+                            isRequired: {
+                                msg: "عذراً ، لا يجب أن يكون الحقل فارغاً !!",
+                            },
                         },
                     },
-                },
-                {
-                    name: "preferredTimeOfVisit",
-                    value: preferredTimeOfVisit,
-                    rules: {
-                        isRequired: {
-                            msg: "عذراً ، لا يجب أن يكون الحقل فارغاً !!",
+                    {
+                        name: "electricityTimes",
+                        value: electricityTimes,
+                        rules: {
+                            isRequired: {
+                                msg: "عذراً ، لا يجب أن يكون الحقل فارغاً !!",
+                            },
                         },
                     },
-                },
-                {
-                    name: "electricityTimes",
-                    value: electricityTimes,
-                    rules: {
-                        isRequired: {
-                            msg: "عذراً ، لا يجب أن يكون الحقل فارغاً !!",
+                    {
+                        name: "isWishRenewSubscription",
+                        value: isWishRenewSubscription,
+                        rules: {
+                            isRequired: {
+                                msg: "عذراً ، لا يجب أن يكون الحقل فارغاً !!",
+                            },
                         },
                     },
-                },
-                {
-                    name: "isWishRenewSubscription",
-                    value: isWishRenewSubscription,
-                    rules: {
-                        isRequired: {
-                            msg: "عذراً ، لا يجب أن يكون الحقل فارغاً !!",
-                        },
-                    },
-                },
-            ]
-        );
-        // تخزين الأخطاء الناتجة في ال state الخاص بالأخطاء
-        setErrors(errorsObject);
-        // التحقق من أنّ الكائن الخاص بالأخطاء فارغ أي لا يوجد أخطاء
-        // أو التحقق من كون نوع الطلب إسعافي + عدد الأخطاء هو 2 ( للدلالة على أنّ الأخطاء هي عدم وجود بيانات لتاريخ يوم الزيارة المفضل والوقت المفضل للزياة )
-        if (Object.keys(errorsObject).length == 0 ||
-            (serviceType === "طلب تنظيف"
-                && Object.keys(errorsObject).length == 2
-                && errorsObject["preferredDateOfVisit"] === "عذراً ، لا يجب أن يكون الحقل فارغاً !!"
-                && errorsObject["preferredTimeOfVisit"] === "عذراً ، لا يجب أن يكون الحقل فارغاً !!"
-            )
-        ) {
-            // تعديل قيمة ال state المسماة isRequestingStatus لتصبح true من أجل استخدامه لاحقاً في إظهار رسالة انتظار
-            setIsRequestingStatus(true);
-            // إنشاء كائن من ال formData لتخزين بيانات الفورم قبل إرساله مع الطلب في جسم الطلب وذلك بسبب وجود ملفات
-            let formData = new FormData();
-            formData.append("serviceType", serviceType);
-            formData.append("subType", subType);
-            formData.append("address", address);
-            // إضافة كل الملفات إلى ال formData
-            for (let i = 0; i < fileList1.length; i++) {
-                formData.append(`file${i}`, fileList1[i]);
-            }
-            for (let i = 0; i < fileList2.length; i++) {
-                formData.append(`file${i}`, fileList2[i]);
-            }
-            // التحقق من نوع الطلب بحيث نضيف بيانات حقلي تاريخ اليوم المفضل للزيارة ووقت الزيارة المفضل في حالة نوع الطلب عادي فقط ( كون الطلب الإسعافي ليس بحاجتهم )
-            if (serviceType === "طلب فحص") {
-                formData.append("preferredDateOfVisit", preferredDateOfVisit);
-                formData.append("preferredTimeOfVisit", preferredTimeOfVisit);
-            }
-            // إضافة باقي بيانات الحقول إلى الـ formDat
-            formData.append("electricityTimes", electricityTimes);
-            formData.append("isWishRenewSubscription", isWishRenewSubscription);
-            formData.append("userId", userId);
-            // بداية محاولة إرسال الطلب
-            try {
+                ]
+            );
+            // تخزين الأخطاء الناتجة في ال state الخاص بالأخطاء
+            setErrors(errorsObject);
+            // التحقق من أنّ الكائن الخاص بالأخطاء فارغ أي لا يوجد أخطاء
+            // أو التحقق من كون نوع الطلب إسعافي + عدد الأخطاء هو 2 ( للدلالة على أنّ الأخطاء هي عدم وجود بيانات لتاريخ يوم الزيارة المفضل والوقت المفضل للزياة )
+            if (Object.keys(errorsObject).length == 0 ||
+                (serviceType === "طلب تنظيف"
+                    && Object.keys(errorsObject).length == 2
+                    && errorsObject["preferredDateOfVisit"] === "عذراً ، لا يجب أن يكون الحقل فارغاً !!"
+                    && errorsObject["preferredTimeOfVisit"] === "عذراً ، لا يجب أن يكون الحقل فارغاً !!"
+                )
+            ) {
+                // تعديل قيمة ال state المسماة isRequestingStatus لتصبح true من أجل استخدامه لاحقاً في إظهار رسالة انتظار
+                setIsRequestingStatus(true);
+                // إنشاء كائن من ال formData لتخزين بيانات الفورم قبل إرساله مع الطلب في جسم الطلب وذلك بسبب وجود ملفات
+                let formData = new FormData();
+                formData.append("serviceType", serviceType);
+                formData.append("subType", subType);
+                formData.append("address", address);
+                // إضافة كل الملفات إلى ال formData
+                for (let i = 0; i < fileList1.length; i++) {
+                    formData.append(`file${i}`, fileList1[i]);
+                }
+                for (let i = 0; i < fileList2.length; i++) {
+                    formData.append(`file${i}`, fileList2[i]);
+                }
+                // التحقق من نوع الطلب بحيث نضيف بيانات حقلي تاريخ اليوم المفضل للزيارة ووقت الزيارة المفضل في حالة نوع الطلب عادي فقط ( كون الطلب الإسعافي ليس بحاجتهم )
+                if (serviceType === "طلب فحص") {
+                    formData.append("preferredDateOfVisit", preferredDateOfVisit);
+                    formData.append("preferredTimeOfVisit", preferredTimeOfVisit);
+                }
+                // إضافة باقي بيانات الحقول إلى الـ formDat
+                formData.append("electricityTimes", electricityTimes);
+                formData.append("isWishRenewSubscription", isWishRenewSubscription);
                 // إرسال الطلب وتخزين الاستجابة في متغير
                 const res = await Axios.post(`${process.env.BASE_API_URL}/requests/create-new-request`, formData, {
                     // إضافة header لتحدد نوع المحتوى ا لمراد إرساله بحيث يسمح بإرسال البيانات ضمن ال formData
                     headers: {
-                        "Content-Type": "multipart/form-data"
+                        "Content-Type": "multipart/form-data",
+                        "Authorization": localStorage.getItem(process.env.userTokenNameInLocalStorage)
                     }
                 });
                 // جلب البيانات الناتجة عن الاستجابة
                 const result = await res.data;
                 // التحقق من البيانات  المُرسلة كاستجابة
-                if (result === "تمّ طلب الخدمة بنجاح ، سوف يتم التواصل معك قريباً جداً") {
+                if (!result.error) {
+                    // تعديل قيمة ال state المسماة isRequestingStatus لتصبح false من أجل استخدامه لاحقاً في إخفاء رسالة الانتظار
+                    setIsRequestingStatus(false);
+                    // تعديل قيمة ال state المسماة isSuccessfulyStatus من أجل استخدامه لاحقاً في إظهار رسالة نجاح العملية
+                    setIsSuccessfulyStatus(true);
                     // تعيين مؤقت ليتم تنفيذ تعليمات بعد ثانيتين
-                    let requestingStatusTimeout = setTimeout(() => {
-                        // تعديل قيمة ال state المسماة isRequestingStatus لتصبح false من أجل استخدامه لاحقاً في إخفاء رسالة الانتظار
-                        setIsRequestingStatus(false);
-                        // تعديل قيمة ال state المسماة isSuccessfulyStatus من أجل استخدامه لاحقاً في إظهار رسالة نجاح العملية
-                        setIsSuccessfulyStatus(true);
-                        // تعيين مؤقت ليتم تنفيذ تعليمات بعد ثانيتين
+                    setTimeout(() => {
+                        // تعديل قيمة ال state المسماة isSuccessfulyStatus لتصبح false من أجل استخدامه لاحقاً في إخفاء رسالة النجاح
+                        setIsSuccessfulyStatus(false);
+                        // تعيين مؤقت ليتم تنفيذ تعليمات بعد ثانية ونصف
                         setTimeout(() => {
-                            // تعديل قيمة ال state المسماة isSuccessfulyStatus لتصبح false من أجل استخدامه لاحقاً في إخفاء رسالة النجاح
-                            setIsSuccessfulyStatus(false);
-                            // تعيين مؤقت ليتم تنفيذ تعليمات بعد ثانية ونصف
-                            setTimeout(() => {
-                                // إعادة تحميل الصفحة من أجل حذف بيانات الحقول لإتاحة الإمكانية للمستخدم من إرسال طلب جديد إن أراد
-                                router.reload();
-                            }, 1500);
-                        }, 2000);
+                            // إعادة تحميل الصفحة من أجل حذف بيانات الحقول لإتاحة الإمكانية للمستخدم من إرسال طلب جديد إن أراد
+                            router.reload();
+                        }, 1500);
                     }, 2000);
                 } else {
                     // تعديل قيمة ال state المسماة isRequestingStatus لتصبح false من أجل استخدامه لاحقاً في إخفاء رسالة الانتظار
                     setIsRequestingStatus(false);
                     // إعادة قيمة ال state المسماة errMsg إلى القيمة الفارغة الافتراضية من أجل استخدامها لاحقاً في إخفاء رسالة الخطأ
-                    setErrorMsg(result);
+                    setErrorMsg(result.msg);
                     // تعيين مؤقت ليتم تنفيذ تعليمات بعد أربع ثواني
                     let errMsgTimeout = setTimeout(() => {
                         // إعادة قيمة ال state المسماة errMsg إلى القيمة الفارغة الافتراضية من أجل استخدامها لاحقاً في إخفاء رسالة الخطأ
@@ -253,10 +253,21 @@ export default function ServiceRequest() {
                         clearTimeout(errMsgTimeout);
                     }, 4000);
                 }
-            } catch (err) {
-                // طباعة رسالة الخطأ في الكونسول إن حصلت مشكلة عند إرسال الطلب للسيرفر
-                console.log(err);
             }
+        }
+        catch (err) {
+            if (err?.response?.data?.msg === "Unauthorized Error") {
+                localStorage.removeItem(process.env.userTokenNameInLocalStorage);
+                await router.replace("/dashboard/admin/login");
+                return;
+            }
+            // طباعة رسالة الخطأ في الكونسول إن حصلت مشكلة عند إرسال الطلب للسيرفر
+            setIsRequestingStatus(false);
+            setErrorMsg("عذراً حدث خطا ما ، يرجى إعادة المحاولة !!");
+            let errorTimeout = setTimeout(() => {
+                setErrorMsg("");
+                clearTimeout(errorTimeout);
+            }, 5000);
         }
     }
     return (
@@ -267,15 +278,14 @@ export default function ServiceRequest() {
                 <title>دكتور سولار - طلب خدمة</title>
             </Head>
             {/* نهاية كتابة معلومات عنصر ال head في ال html */}
-            {/* بداية عرض مكون الرأس الذي أنشأناه */}
-            <Header />
-            {/* نهاية عرض مكون الرأس الذي أنشأناه */}
-            {/* بداية كتابة كود ال jsx لعنصر ال html المسمى page-content */}
-            <section className="page-content pt-4 pb-4">
-                {/* بداية مكون الحاوية من البوتستراب */}
-                <div className="container">
-                    {/* في حالة لم يكن هنالك رسالة خطأ عند طلب بيانات المستخدم فإننا نعرض صفحة طلب الخدمة  */}
-                    {!errorInFetchUserDataMsg ? <>
+            {!isLoadingPage && !isErrorMsgOnLoadingThePage && <>
+                {/* بداية عرض مكون الرأس الذي أنشأناه */}
+                <Header />
+                {/* نهاية عرض مكون الرأس الذي أنشأناه */}
+                {/* بداية كتابة كود ال jsx لعنصر ال html المسمى page-content */}
+                <section className="page-content pt-4 pb-4">
+                    {/* بداية مكون الحاوية من البوتستراب */}
+                    <div className="container">
                         {/* بداية مكون الشبكة من البوتستراب */}
                         <div className="row mb-4 align-items-center text-center">
                             <div className="col-md-3">
@@ -430,11 +440,13 @@ export default function ServiceRequest() {
                             </button>}
                             {/* في حالة كان لدينا خطأ نظهر المكون التالي */}
                         </form>
-                    </> : <p className='alert alert-danger'>{errorInFetchUserDataMsg}</p>}
-                </div>
-                {/* نهاية مكون الحاوية من البوتستراب */}
-            </section>
-            {/* نهاية كتابة كود ال jsx لعنصر ال html المسمى page-content */}
+                    </div>
+                    {/* نهاية مكون الحاوية من البوتستراب */}
+                </section>
+                {/* نهاية كتابة كود ال jsx لعنصر ال html المسمى page-content */}
+            </>}
+            {isLoadingPage && !isErrorMsgOnLoadingThePage && <LoaderPage />}
+            {isErrorMsgOnLoadingThePage && <ErrorOnLoadingThePage />}
         </div>
         // نهاية كتابة كود ال jsx لصفحة طلب الخدمة
     );
