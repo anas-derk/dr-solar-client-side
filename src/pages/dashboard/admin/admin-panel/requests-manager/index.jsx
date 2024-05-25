@@ -1,9 +1,10 @@
 import Head from "next/head";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import Axios from "axios";
 import Link from "next/link";
 import { getAdminInfo, getAllRequestsInsideThePage, getRequestsCount } from "../../../../../../public/global_functions/popular";
+import LoaderPage from "@/components/LoaderPage";
+import ErrorOnLoadingThePage from "@/components/ErrorOnLoadingThePage";
 
 const RequestsManager = ({ result }) => {
     const [isLoadingPage, setIsLoadingPage] = useState(true);
@@ -63,13 +64,14 @@ const RequestsManager = ({ result }) => {
             <Head>
                 <title>دكتور سولار - إدارة الطلبات</title>
             </Head>
-            {/* Start Content Section */}
+            {!isLoadingPage && !isErrorMsgOnLoadingThePage && <>
+                {/* Start Content Section */}
             <section className="content text-center pt-5 pb-5">
                 {/* Start Container Component From Bootstrap */}
                 <div className="container">
                     <h1 className="welcome-msg mb-4">مرحباً بك في صفحة إدارة الطلبات الخاصة بك في دكتور سولار</h1>
                     <hr />
-                    {result.length > 0 ? result.map((request, index) =>
+                    {allRequestsInsideThePage.length > 0 ? allRequestsInsideThePage.map((request, index) =>
                         <>
                             {/* Start Request Details Box */}
                             <div className="request-details-box mb-5" key={request._id}>
@@ -138,17 +140,12 @@ const RequestsManager = ({ result }) => {
                 {/* End Container Component From Bootstrap */}
             </section>
             {/* End Content Section */}
+            </>}
+            {isLoadingPage && !isErrorMsgOnLoadingThePage && <LoaderPage />}
+            {isErrorMsgOnLoadingThePage && <ErrorOnLoadingThePage />}
         </div>
         // End Requests Manager Page
     );
-}
-
-export async function getServerSideProps() {
-    let res = await Axios.get(`${process.env.BASE_API_URL}/requests/all-requests`);
-    let result = await res.data;
-    return {
-        props: { result },
-    };
 }
 
 export default RequestsManager;

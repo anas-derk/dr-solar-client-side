@@ -4,8 +4,9 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import LoaderPage from "@/components/LoaderPage";
 import ErrorOnLoadingThePage from "@/components/ErrorOnLoadingThePage";
+import { getAdminInfo } from "../../../../../../../../public/global_functions/popular";
 
-const RequestSenderInfo = ({ result }) => {
+const RequestSenderInfo = ({ requestId, userId }) => {
     const [isLoadingPage, setIsLoadingPage] = useState(true);
     const [isErrorMsgOnLoadingThePage, setIsErrorMsgOnLoadingThePage] = useState(false);
     const [requestSenderInfo, setRequestSenderInfo] = useState({});

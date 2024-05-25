@@ -96,7 +96,7 @@ export default function AddAds() {
                                 placeholder="الرجاء إدخال نص الإعلان"
                                 required
                                 className="form-control mb-4 p-3"
-                                onChange={(e) => setAdsContent(e.target.value.trim())}
+                                onChange={(e) => setAdContent(e.target.value.trim())}
                                 value={adContent}
                             />
                             {!errorMsg && !successMsg && !waitMsg && <button type="submit" className="btn btn-danger p-3">إضافة إعلان</button>}

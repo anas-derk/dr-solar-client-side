@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { getAdminInfo } from "../../../../../public/global_functions/popular";
 import LoaderPage from "@/components/LoaderPage";
 import ErrorOnLoadingThePage from "@/components/ErrorOnLoadingThePage";
+import { inputValuesValidation } from "../../../../../public/global_functions/validations";
 
 const AdminLogin = () => {
     const [isLoadingPage, setIsLoadingPage] = useState(true);
@@ -82,6 +83,7 @@ const AdminLogin = () => {
                 }
             }
         } catch (err) {
+            console.log(err);
             setIsLoginingStatus(false);
             setErrorMsg("عذراً حدث خطا ما ، يرجى إعادة المحاولة !!");
             setTimeout(() => {
