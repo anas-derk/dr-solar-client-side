@@ -3,14 +3,14 @@ const nextConfig = {
   reactStrictMode: false,
   swcMinify: true,
   env: {
-    BASE_API_URL: process.env.NODE_ENV === "development" ? "http://localhost:4000" : "https://api.dr-solar2023.com",
+    BASE_API_URL: process.env.NODE_ENV === "development" ? "http://localhost:7000" : "https://api.dr-solar2023.com",
     userTokenNameInLocalStorage: "dr-solar-user-token",
     adminTokenNameInLocalStorage: "dr-solar-admin-token",
   },
   async headers() {
     return [
       {
-        source: process.env.NODE_ENV === "development" ? "//localhost:4000/(.*)" : "//api.dr-solar2023.com/(.*)",
+        source: process.env.NODE_ENV === "development" ? "//localhost:7000/(.*)" : "//api.dr-solar2023.com/(.*)",
         headers: [
           { key: "Access-Control-Allow-Credentials", value: "true" },
           {
