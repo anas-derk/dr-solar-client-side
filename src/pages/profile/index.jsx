@@ -8,6 +8,8 @@ import { inputValuesValidation } from '../../../public/global_functions/validati
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import { getUserInfo } from '../../../public/global_functions/popular';
+import LoaderPage from '@/components/LoaderPage';
+import ErrorOnLoadingThePage from '@/components/ErrorOnLoadingThePage';
 
 // تعريف دالة صفحة الملف الشخصي 
 export default function Profile() {
@@ -246,7 +248,7 @@ export default function Profile() {
                 <title>دكتور سولار - الملف الشخصي</title>
             </Head>
             {/* نهاية كتابة معلومات عنصر ال head في ال html */}
-            {!isLo && <>
+            {!isLoadingPage && !isErrorMsgOnLoadingThePage && <>
                 {/* بداية عرض مكون الرأس الذي أنشأناه */}
                 <Header />
                 {/* نهاية عرض مكون الرأس الذي أنشأناه */}
@@ -393,6 +395,8 @@ export default function Profile() {
                 </section>
                 {/* نهاية كتابة كود ال jsx لعنصر ال html المسمى page-content */}
             </>}
+            {isLoadingPage && !isErrorMsgOnLoadingThePage && <LoaderPage />}
+            {isErrorMsgOnLoadingThePage && <ErrorOnLoadingThePage />}
         </div>
         // نهاية كتابة كود ال jsx لصفحة الملف الشخصي
     );
