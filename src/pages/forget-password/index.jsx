@@ -98,7 +98,7 @@ export default function ForgetPassword() {
                     // تعديل قيمة ال state المسماة isWaitCheckStatus لتصبح false من أجل استخدامه لاحقاً في إخفاء رسالة الانتظار
                     setIsWaitCheckStatus(false);
                     // تعديل قيمة ال state المسماة errMsg من أجل استخدامه لاحقاً في إظهار رسالة خطأ
-                    setErrorMsg(result);
+                    setErrorMsg(result.msg);
                     // تعيين مؤقت ليتم تنفيذ تعليمات بعد ثانيتين
                     let errorTimeout = setTimeout(() => {
                         // إعادة قيمة ال state المسماة errMsg إلى القيمة الفارغة الافتراضية من أجل استخدامها لاحقاً في إخفاء رسالة الخطأ

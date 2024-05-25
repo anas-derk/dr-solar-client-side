@@ -27,7 +27,6 @@ export default function ServiceRequest() {
     const [preferredTimeOfVisit, setPreferredTimeOfVisit] = useState("");
     const [electricityTimes, setElectricityTimes] = useState("");
     const [isWishRenewSubscription, setisWishRenewSubscription] = useState("");
-    const [userId, setUserId] = useState("");
     const [errors, setErrors] = useState({});
     const [isRequestingStatus, setIsRequestingStatus] = useState(false);
     const [isSuccessfulyStatus, setIsSuccessfulyStatus] = useState(false);

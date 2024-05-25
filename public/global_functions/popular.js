@@ -4,7 +4,7 @@ async function getUserInfo() {
     try{
         const res = await axios.get(`${process.env.BASE_API_URL}/users/user-info`, {
             headers: {
-                "Authorization": localStorage.getItem("mr-fix-user-token"),
+                "Authorization": localStorage.getItem(process.env.userTokenNameInLocalStorage),
             },
         });
         return res.data;

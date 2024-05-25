@@ -335,7 +335,7 @@ export default function Signup() {
                                     >
                                         <option defaultValue="" hidden>اختر المحافظة</option>
                                         <option value="damascus">دمشق</option>
-                                        <option value="rif-Damascus">ريف دمشق</option>
+                                        <option value="rif-damascus">ريف دمشق</option>
                                     </select>
                                     {/* بداية رسالة الخطأ بالإدخال للمُدخل المحدد */}
                                     {errors["city"] && <p className='error-msg text-danger'>{errors["city"]}</p>}

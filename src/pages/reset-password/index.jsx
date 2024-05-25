@@ -4,14 +4,14 @@ import Header from '@/components/Header';
 import { useEffect, useState } from 'react';
 import ResetPasswordImage from "../../../public/images/ResetPassword/reset-password.png";
 import { AiOutlineClockCircle, AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import { inputValuesValidation } from '../../../public/global_functions/validations';
+import { inputValuesValidation, isEmail } from '../../../public/global_functions/validations';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import LoaderPage from '@/components/LoaderPage';
 import ErrorOnLoadingThePage from '@/components/ErrorOnLoadingThePage';
 
 // تعريف دالة صفحة إعادة ضبط كلمة السر 
-export default function ResetPassword() {
+export default function ResetPassword({ email }) {
     // تعريف المتغيرات المطلوب كــ state
     const [isLoadingPage, setIsLoadingPage] = useState(true);
     const [isErrorMsgOnLoadingThePage, setIsErrorMsgOnLoadingThePage] = useState(false);
@@ -21,7 +21,6 @@ export default function ResetPassword() {
     const [errors, setErrors] = useState({});
     const [isResetingPasswordStatus, setIsResetingPasswordStatus] = useState(false);
     const [isSuccessfulyStatus, setIsSuccessfulyStatus] = useState(false);
-    const [tempResetPasswordData, setTempResetPasswordData] = useState("");
     const [errMsg, setErrorMsg] = useState("");
     const [isVisiblePassword, setIsVisiblePassword] = useState(false);
     const [isVisibleConfirmPassword, setIsVisibleConfirmPassword] = useState(false);
@@ -75,15 +74,11 @@ export default function ResetPassword() {
             const errorsObject = inputValuesValidation(
                 [
                     {
-                        name: "typedUserCode",
-                        value: typedUserCode,
+                        name: "code",
+                        value: code,
                         rules: {
                             isRequired: {
                                 msg: "عذراً ، لا يجب أن يكون الحقل فارغاً !!",
-                            },
-                            isMatch: {
-                                value: tempResetPasswordData.code,
-                                msg: "عذراً الرمز غير صحيح !!",
                             },
                         },
                     },
@@ -123,27 +118,31 @@ export default function ResetPassword() {
                 setIsResetingPasswordStatus(true);
                 // بداية محاولة إرسال الطلب
                 // إرسال الطلب وتخزين الاستجابة في متغير
-                const res = await axios.put(`${process.env.BASE_API_URL}/users/reset-password/${tempResetPasswordData.userIdAndType.userId}?userType=${tempResetPasswordData.userIdAndType.userType}&newPassword=${newPassword}`);
+                const res = await axios.put(`${process.env.BASE_API_URL}/users/reset-password?email=${email}&code=${code}&newPassword=${newPassword}`);
                 // جلب البيانات الناتجة عن الاستجابة
                 const result = res.data;
                 // التحقق من البيانات  المُرسلة كاستجابة
                 if (!result.error) {
-                    // تعديل قيمة ال state المسماة isResetingPasswordStatus لتصبح false من أجل استخدامه لاحقاً في إخفاء رسالة الانتظار
-                    setIsResetingPasswordStatus(false);
-                    // تعديل قيمة ال state المسماة isSuccessfulyStatus من أجل استخدامه لاحقاً في إظهار رسالة نجاح العملية
-                    setIsSuccessfulyStatus(true);
-                    // تعيين مؤقت ليتم تنفيذ تعليمات بعد ثانيتين ونصف
-                    let successStatusTimeout = setTimeout(async () => {
-                        // حذف المتغيرات التي تحتوي المؤقتات
-                        clearTimeout(successStatusTimeout);
-                        // إعادة تحميل الصفحة من أجل تسجيل الدخول
-                        await outer.push("/login");
-                    }, 2500);
+                    // تعيين مؤقت ليتم تنفيذ تعليمات بعد ثانيتين
+                    let resetPasswordStatusTimeout = setTimeout(() => {
+                        // تعديل قيمة ال state المسماة isResetingPasswordStatus لتصبح false من أجل استخدامه لاحقاً في إخفاء رسالة الانتظار
+                        setIsResetingPasswordStatus(false);
+                        // تعديل قيمة ال state المسماة isSuccessfulyStatus من أجل استخدامه لاحقاً في إظهار رسالة نجاح العملية
+                        setIsSuccessfulyStatus(true);
+                        // تعيين مؤقت ليتم تنفيذ تعليمات بعد ثانيتين ونصف
+                        let successStatusTimeout = setTimeout(async () => {
+                            // حذف المتغيرات التي تحتوي المؤقتات
+                            clearTimeout(resetPasswordStatusTimeout);
+                            clearTimeout(successStatusTimeout);
+                            // إعادة تحميل الصفحة من أجل تسجيل الدخول
+                            await router.push("/login");
+                        }, 2500);
+                    }, 2000);
                 } else {
                     // تعديل قيمة ال state المسماة isResetingPasswordStatus لتصبح false من أجل استخدامه لاحقاً في إخفاء رسالة الانتظار
                     setIsResetingPasswordStatus(false);
                     // إعادة قيمة ال state المسماة errMsg إلى القيمة الفارغة الافتراضية من أجل استخدامها لاحقاً في إخفاء رسالة الخطأ
-                    setErrorMsg(result);
+                    setErrorMsg(result.msg);
                     // تعيين مؤقت ليتم تنفيذ تعليمات بعد أربع ثواني
                     let errMsgTimeout = setTimeout(() => {
                         // إعادة قيمة ال state المسماة errMsg إلى القيمة الفارغة الافتراضية من أجل استخدامها لاحقاً في إخفاء رسالة الخطأ
@@ -195,7 +194,7 @@ export default function ResetPassword() {
                                         placeholder="أدخل الكود"
                                         // في حالة يوجد خطأ بالإدخال نجعل الحواف بلون أحمر
                                         className={`form-control p-3 ${errors["typedUserCode"] ? "border border-danger mb-2" : "mb-4"}`}
-                                        onChange={(e) => setTypedUserCode(e.target.value.trim())}
+                                        onChange={(e) => setCode(e.target.value.trim())}
                                     />
                                     {/* بداية رسالة الخطأ بالإدخال للمُدخل المحدد */}
                                     {errors["typedUserCode"] && <p className='error-msg text-danger'>{errors["typedUserCode"]}</p>}

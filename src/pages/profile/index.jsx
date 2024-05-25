@@ -124,7 +124,6 @@ export default function Profile() {
                         value: userInfo.password,
                         rules: {
                             isValidPassword: {
-                                value: password,
                                 msg: "عذراً ، يجب أن تكون كلمة السر تحتوي على الأقل 8 حروف أو أرقام أو كلاهما.",
                             },
                         },
@@ -175,19 +174,19 @@ export default function Profile() {
                 // تعريف كائن بيانات المستخدم الذي سنستخدمه في إرسال البيانات المطلوب فقط مع الطلب إلى الباك ايند
                 let newUserData = {};
                 newUserData = {
-                    firstAndLastName: firstAndLastName,
-                    email: email,
-                    mobilePhone: mobilePhone,
-                    password: password,
-                    gender,
-                    birthday,
-                    city,
-                    address: address,
+                    firstAndLastName: userInfo.firstAndLastName,
+                    email: userInfo.email,
+                    mobilePhone: userInfo.mobilePhone,
+                    password: userInfo.password,
+                    gender: userInfo.gender,
+                    birthday: userInfo.birthday,
+                    city: userInfo.city,
+                    address: userInfo.address,
                 }
                 // في حالة الإيميل هو نفسه الإيميل الافتراضي أي لم يتم تعديل الإيميل عندها نضع قيمة المتغير isSameOfEmail هي نعم وإلا نضع لا
-                const isSameOfEmail = email === defaultEmail ? "yes" : "no";
+                const isSameOfEmail = userInfo.email === defaultEmail ? "yes" : "no";
                 // في حالة رقم الموبايل هو نفسه رقم الموبايل الافتراضي أي لم يتم تعديل الإيميل عندها نضع قيمة المتغير isSameOfEmail هي نعم وإلا نضع لا
-                const isSameOfMobilePhone = mobilePhone === defaultMobilePhone ? "yes" : "no";
+                const isSameOfMobilePhone = userInfo.mobilePhone === defaultMobilePhone ? "yes" : "no";
                 // بداية محاولة إرسال الطلب
                 // جلب البيانات الناتجة عن الاستجابة
                 const res = await axios.put(`${process.env.BASE_API_URL}/users/update-user-info?isSameOfEmail=${isSameOfEmail}&isSameOfMobilePhone=${isSameOfMobilePhone}`, newUserData, {
@@ -225,6 +224,7 @@ export default function Profile() {
             }
         }
         catch (err) {
+            console.log(err);
             if (err?.response?.data?.msg === "Unauthorized Error") {
                 localStorage.removeItem(process.env.userTokenNameInLocalStorage);
                 await router.replace("/dashboard/admin/login");
@@ -239,7 +239,6 @@ export default function Profile() {
             }, 5000);
         }
     }
-
     return (
         // بداية كتابة كود ال jsx لصفحة الملف الشخصي
         <div className="profile">
@@ -334,7 +333,7 @@ export default function Profile() {
                                         onFocus={() => setInputType("date")}
                                         // تغيير نوع المدخل إلى نص عند إزالة التركيز عن المدخل
                                         onBlur={() => setInputType("text")}
-                                        onChange={(e) => setBirthday(e.target.value)}
+                                        onChange={(e) => setUserInfo({ ...userInfo, birthday: e.target.value })}
                                         defaultValue={userInfo.birthday}
                                     />
                                     {/* بداية رسالة الخطأ بالإدخال للمُدخل المحدد */}
