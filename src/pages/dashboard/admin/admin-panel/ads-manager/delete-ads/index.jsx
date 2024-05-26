@@ -5,8 +5,9 @@ import axios from "axios";
 import { getAdminInfo, getAdsCount, getAllAdsInsideThePage } from "../../../../../../../public/global_functions/popular";
 import LoaderPage from "@/components/LoaderPage";
 import ErrorOnLoadingThePage from "@/components/ErrorOnLoadingThePage";
+import PaginationBar from "@/components/PaginationBar";
 
-export default function DeleteAds({ result }) {
+export default function DeleteAds() {
     const [isLoadingPage, setIsLoadingPage] = useState(true);
     const [isErrorMsgOnLoadingThePage, setIsErrorMsgOnLoadingThePage] = useState(false);
     const [allAdsInsideThePage, setAllAdsInsideThePage] = useState([]);
@@ -14,8 +15,8 @@ export default function DeleteAds({ result }) {
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPagesCount, setTotalPagesCount] = useState(0);
     const [errorMsg, setErrorMsg] = useState("");
-    const [successMsg, setSuccessMsg] = useState("");
     const [waitMsg, setWaitMsg] = useState("");
+    const [deletingAdId, setDeletingAdId] = useState("");
     const pageSize = 5;
     const router = useRouter();
     useEffect(() => {
@@ -51,14 +52,33 @@ export default function DeleteAds({ result }) {
     const deleteAd = async (e, adId) => {
         try {
             e.preventDefault();
+            setWaitMsg("جاري الحذف ...");
+            setDeletingAdId(adId);
             const res = await axios.delete(`${process.env.BASE_API_URL}/ads/${adId}`, {
                 headers: {
                     Authorization: localStorage.getItem(process.env.adminTokenNameInLocalStorage)
                 }
             });
             const result = res.data;
+            setWaitMsg("");
             if (!result.error) {
-                router.reload();
+                const newAllAdsInsideThePage = allAdsInsideThePage.filter((ad) => ad._id !== adId);
+                setAllAdsInsideThePage(allAdsInsideThePage.filter((ad) => ad._id !== adId));
+                setDeletingAdId("");
+                if (newAllAdsInsideThePage.length === 0) {
+                    if (currentPage > 1) {
+                        await getPreviousPage();
+                        setTotalPagesCount(totalPagesCount - 1);
+                    }
+                    if (currentPage === 1) {
+                        if (totalPagesCount > 1) {
+                            await getSpecificPage(1);
+                            setTotalPagesCount(totalPagesCount - 1);
+                        } else {
+                            setTotalPagesCount(totalPagesCount - 1);
+                        }
+                    }
+                }
             }
         }
         catch (err) {
@@ -67,9 +87,30 @@ export default function DeleteAds({ result }) {
             setErrorMsg("عذراً حدث خطا ما ، يرجى إعادة المحاولة !!");
             let errorTimeout = setTimeout(() => {
                 setErrorMsg("");
+                setDeletingAdId("");
                 clearTimeout(errorTimeout);
             }, 5000);
         }
+    }
+    const getPreviousPage = async () => {
+        setIsGetAds(true);
+        const newCurrentPage = currentPage - 1;
+        setAllAdsInsideThePage((await getAllAdsInsideThePage(newCurrentPage, pageSize)).data);
+        setCurrentPage(newCurrentPage);
+        setIsGetAds(false);
+    }
+    const getNextPage = async () => {
+        setIsGetAds(true);
+        const newCurrentPage = currentPage + 1;
+        setAllAdsInsideThePage((await getAllAdsInsideThePage(newCurrentPage, pageSize)).data);
+        setCurrentPage(newCurrentPage);
+        setIsGetAds(false);
+    }
+    const getSpecificPage = async (pageNumber) => {
+        setIsGetAds(true);
+        setAllAdsInsideThePage((await getAllAdsInsideThePage(pageNumber, pageSize)).data);
+        setCurrentPage(pageNumber);
+        setIsGetAds(false);
     }
     return (
         // Start Delete And Edit Ads Page
@@ -85,7 +126,7 @@ export default function DeleteAds({ result }) {
                         <h1 className="welcome-msg mb-4">مرحباً بك في صفحة حذف الإعلانات الخاصة بك في دكتور سولار</h1>
                         <hr />
                         {allAdsInsideThePage.length > 0 ? (
-                            <table className="ads-list-table">
+                            <table className="ads-list-table mb-4">
                                 <tbody>
                                     {allAdsInsideThePage.map((ad) => (
                                         <tr key={ad._id}>
@@ -97,9 +138,24 @@ export default function DeleteAds({ result }) {
                                                     className="delete-ads-form"
                                                     onSubmit={(e) => deleteAd(e, ad._id)}
                                                 >
-                                                    <button type="submit" className="btn btn-danger p-3">
+                                                    {ad._id !== deletingAdId && <button
+                                                        type="submit"
+                                                        className="btn btn-danger p-3"
+                                                    >
                                                         حذف الإعلان
-                                                    </button>
+                                                    </button>}
+                                                    {waitMsg && ad._id === deletingAdId && <button
+                                                        className="btn btn-danger p-3"
+                                                        disabled
+                                                    >
+                                                        جاري حذف الاعلان ...
+                                                    </button>}
+                                                    {errorMsg && ad._id === deletingAdId && <button
+                                                        type="submit"
+                                                        className="btn btn-warning p-3"
+                                                    >
+                                                        {errorMsg}
+                                                    </button>}
                                                 </form>
                                             </td>
                                         </tr>
@@ -109,6 +165,21 @@ export default function DeleteAds({ result }) {
                         ) : (
                             <p className="alert alert-danger">عذراً لا يوجد أي إعلانات حالياً</p>
                         )}
+                        {totalPagesCount > 1 && !isGetAds &&
+                            <PaginationBar
+                                totalPagesCount={totalPagesCount}
+                                currentPage={currentPage}
+                                getPreviousPage={getPreviousPage}
+                                getNextPage={getNextPage}
+                                getSpecificPage={getSpecificPage}
+                                paginationButtonTextColor={"#FFF"}
+                                paginationButtonBackgroundColor={"var(--main-color-one)"}
+                                activePaginationButtonColor={"#FFF"}
+                                activePaginationButtonBackgroundColor={"#000"}
+                                isDisplayCurrentPageNumberAndCountOfPages={false}
+                                isDisplayNavigateToSpecificPageForm={false}
+                            />
+                        }
                     </div>
                     {/* End Container Component From Bootstrap */}
                 </section>
