@@ -43,7 +43,7 @@ export default function Login() {
             getUserInfo()
                 .then(async (result) => {
                     if (!result.error) {
-                        await router.push("/");
+                        await router.replace("/");
                     } else {
                         localStorage.removeItem(process.env.userTokenNameInLocalStorage);
                         setIsLoadingPage(false);
